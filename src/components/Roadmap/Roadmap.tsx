@@ -1,6 +1,5 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
 import type { Task, TaskStatus, TaskTrack } from "../../types/task";
+import { RoadmapPath } from "./RoadmapPath";
 import "./Roadmap.css";
 
 const TRACK_ORDER: TaskTrack[] = ["HTML", "CSS", "HTML + CSS", "JavaScript", "Full Project"];
@@ -10,6 +9,8 @@ type RoadmapProps = {
   statusByTaskId: Record<string, TaskStatus>;
 };
 
+/** Day 1 roadmap: tasks grouped into sub-tracks (HTML, CSS, ...), each its
+ * own connected path. */
 export function Roadmap({ tasks, statusByTaskId }: RoadmapProps) {
   const tracks = TRACK_ORDER.map((track) => ({
     track,
@@ -28,30 +29,7 @@ export function Roadmap({ tasks, statusByTaskId }: RoadmapProps) {
               {group.steps.length} exercise{group.steps.length === 1 ? "" : "s"}
             </span>
           </div>
-          <div className="roadmap-track__path">
-            {group.steps.map((task, index) => {
-              const status = statusByTaskId[task.id] ?? "not-started";
-              const previousStatus =
-                index > 0 ? statusByTaskId[group.steps[index - 1].id] ?? "not-started" : null;
-              return (
-                <Fragment key={task.id}>
-                  {index > 0 && (
-                    <div
-                      className={`roadmap-connector${
-                        previousStatus === "submitted" ? " roadmap-connector--done" : ""
-                      }`}
-                    />
-                  )}
-                  <Link to={`/task/${task.id}`} className={`roadmap-step roadmap-step--${status}`}>
-                    <span className="roadmap-step__circle">
-                      {status === "submitted" ? "✓" : String(task.order ?? index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="roadmap-step__title">{task.title}</span>
-                  </Link>
-                </Fragment>
-              );
-            })}
-          </div>
+          <RoadmapPath steps={group.steps} statusByTaskId={statusByTaskId} />
         </div>
       ))}
     </div>
