@@ -207,7 +207,237 @@ const task06: Task = {
   },
 };
 
-export const tasks: Task[] = [task01, task02, task03, task04, task05, task06];
+const day1Task01: Task = {
+  id: "day1-01",
+  title: "HTML Basics",
+  description: "Practice editing basic HTML by making small text changes to the Student Portal page.",
+  track: "HTML",
+  order: 1,
+  instructions: [
+    "Change the main heading (\"Student Portal\") to a different heading of your choice.",
+    "Change the welcome message paragraph to a different sentence of your choice.",
+    "Add a new paragraph below the student details showing a preparation status, e.g. \"Preparation Status: In Progress\".",
+    "Change the button text from \"View Profile\" to \"See My Profile\".",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Student Portal</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <h1>Student Portal</h1>\n\n  <p>Welcome to the placement preparation program.</p>\n\n  <h2>Student Details</h2>\n\n  <p>Name: Ananya</p>\n  <p>Roll Number: 24AG1A05T2</p>\n  <p>Status: Active</p>\n\n  <button>View Profile</button>\n\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// This exercise does not require any JavaScript.\n",
+  },
+};
+
+const day1Task02: Task = {
+  id: "day1-02",
+  title: "HTML id & class Attributes",
+  description: "Practice adding id and class attributes to existing HTML elements so they can be targeted individually or as a group.",
+  track: "HTML",
+  order: 2,
+  instructions: [
+    "Add id=\"studentStatus\" to the <span> that contains \"Active\".",
+    "Give both buttons a shared class=\"profile-btn\".",
+    "Give the \"View Profile\" button its own id=\"viewProfileBtn\" (in addition to the shared class).",
+    "Give the \"Edit Profile\" button its own id=\"editProfileBtn\".",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Student Profile</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <h1>Student Profile</h1>\n\n  <p>Name: Ananya</p>\n  <p>Status: <span id = \"sas\">Active</span></p>\n\n  <button >View Profile</button>\n  <button>Edit Profile</button>\n\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// This exercise does not require any JavaScript.\n",
+  },
+};
+
+const day1Task03: Task = {
+  id: "day1-03",
+  title: "CSS Basics",
+  description: "Practice basic CSS properties by styling the Student Card page using style.css.",
+  track: "CSS",
+  order: 3,
+  instructions: [
+    "Change the colour of the <h1> heading text.",
+    "Give the card (.card) a background colour.",
+    "Add padding inside the card so the text isn't touching its edges.",
+    "Add a border around the card.",
+    "Round the corners of the card.",
+    "Add margin spacing between the paragraphs inside the card.",
+    "Style the button with a background colour and a text colour.",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Student Card</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n\n  <h1>Student Card</h1>\n\n  <div class=\"card\">\n    <p>Name: Ananya</p>\n    <p>Roll Number: 24AG1A05T2</p>\n    <p>Status: Active</p>\n    <button>View Profile</button>\n  </div>\n\n</body>\n</html>\n",
+    "style.css": "body {\n  font-family: Arial, sans-serif;\n  max-width: 600px;\n  margin: 40px auto;\n  padding: 0 16px;\n}\n\n/* TODO (Student CSS objectives):\n   Style the elements below according to TASK.md.\n   Add your rules underneath this comment. */\n",
+    "script.js": "// This exercise does not require any JavaScript.\n",
+  },
+};
+
+const day1Task04: Task = {
+  id: "day1-04",
+  title: "CSS Selectors",
+  description: "Practice the three most common CSS selector types: the element selector, the ID selector, and the class selector.",
+  track: "CSS",
+  order: 4,
+  instructions: [
+    "Style all paragraphs on the page using an element selector, e.g. p { ... }.",
+    "Style only the status (<span id=\"status\">) using its ID selector - this must not affect the paragraphs.",
+    "Style both buttons using their shared class selector (.primary-btn).",
+    "Make the status visually distinct (different background colour, bold text, or padding) so it stands out.",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>CSS Selectors Practice</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n\n  <h1>Student Dashboard</h1>\n\n  <p>This is the first paragraph on the page.</p>\n  <p>This is the second paragraph on the page.</p>\n\n  <p>Status: <span id=\"status\">Active</span></p>\n\n  <button class=\"primary-btn\">Save</button>\n  <button class=\"primary-btn\">Cancel</button>\n\n</body>\n</html>\n",
+    "style.css": "body {\n  font-family: Arial, sans-serif;\n  max-width: 600px;\n  margin: 40px auto;\n  padding: 0 16px;\n}\n\n/* TODO (Student CSS objectives):\n   Add your selector rules below, according to TASK.md.\n   You will need an element selector, an ID selector, and a class selector. */\n",
+    "script.js": "// This exercise does not require any JavaScript.\n",
+  },
+};
+
+const day1Task05: Task = {
+  id: "day1-05",
+  title: "Select an Element",
+  description: "Learn how to select an HTML element from JavaScript and store it in a variable.",
+  track: "JavaScript",
+  order: 5,
+  instructions: [
+    "In script.js, select the element with id=\"message\".",
+    "Store the selected element in a variable named message.",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Select an Element</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <h2 id=\"message\">Hello</h2>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// Task: select the element with id \"message\" and store it in a\n// variable called `message`. See TASK.md for details.\n",
+  },
+};
+
+const day1Task06: Task = {
+  id: "day1-06",
+  title: "Change Text From JavaScript",
+  description: "Learn how to select an element and change the text it displays using JavaScript.",
+  track: "JavaScript",
+  order: 6,
+  instructions: [
+    "Select the element with id=\"message\".",
+    "Change its displayed text so the page shows exactly: \"Welcome to Cognizant Preparation\".",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Change Text</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <h2 id=\"message\">Old Message</h2>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// Task: select the \"message\" element and change its displayed text.\n// See TASK.md for details.\n",
+  },
+};
+
+const day1Task07: Task = {
+  id: "day1-07",
+  title: "Responding to Click Events",
+  description: "Learn how to respond to a button click using an event listener.",
+  track: "JavaScript",
+  order: 7,
+  instructions: [
+    "Select the button with id=\"btn\" and the message element with id=\"message\".",
+    "Add a click event listener to the button.",
+    "When the button is clicked, change the message text from \"Waiting...\" to \"Button clicked!\"",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Click Event</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <h2>Click the button</h2>\n\n  <button id=\"btn\">Click Me</button>\n\n  <p id=\"message\">Waiting...</p>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// Task: when the button is clicked, change the message text.\n// See TASK.md for details.\n",
+  },
+};
+
+const day1Task08: Task = {
+  id: "day1-08",
+  title: "Showing a Popup",
+  description: "Learn how to show a popup message to the user in response to a button click.",
+  track: "JavaScript",
+  order: 8,
+  instructions: [
+    "Select the \"Submit\" button (id=\"submitBtn\").",
+    "Add a click event listener to it.",
+    "When clicked, display a popup showing exactly: \"Registration successful!\"",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Course Registration</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <h2>Course Registration</h2>\n\n  <p>\n    Name: <input type=\"text\" id=\"nameInput\" />\n  </p>\n\n  <button id=\"submitBtn\">Submit</button>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// Task: when Submit is clicked, show a popup message.\n// See TASK.md for details.\n",
+  },
+};
+
+const day1Task09: Task = {
+  id: "day1-09",
+  title: "Reading Input & Conditions",
+  description: "Learn how to read the value typed into an input field, and use if / else to make a decision based on it.",
+  track: "JavaScript",
+  order: 9,
+  instructions: [
+    "Select the name input (id=\"nameInput\") and the \"Register\" button (id=\"registerBtn\").",
+    "Add a click event listener to the Register button.",
+    "When clicked, read the current value typed into the name input.",
+    "If the value is empty, show a popup: \"Please enter your name.\"",
+    "Otherwise, show a popup: \"Registration successful!\"",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Course Registration</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <h2>Course Registration</h2>\n\n  <p>\n    Name: <input type=\"text\" id=\"nameInput\" />\n  </p>\n\n  <button id=\"registerBtn\">Register</button>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// Task: read the name input's value and show a different popup\n// depending on whether it is empty. See TASK.md for details.\n",
+  },
+};
+
+const day1Task10: Task = {
+  id: "day1-10",
+  title: "Show / Hide Elements",
+  description: "Learn how to hide and show an element using JavaScript by changing its style.display property.",
+  track: "JavaScript",
+  order: 10,
+  instructions: [
+    "Select the message (id=\"message\") and the \"Hide Message\" button (id=\"hideBtn\").",
+    "Add a click event listener to the Hide Message button that hides the message.",
+    "(Optional challenge) Select the \"Show Message\" button (id=\"showBtn\") and add a listener that makes the message visible again.",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Show / Hide</title>\n</head>\n<body style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px;\">\n\n  <div id=\"message\">\n    <h2>Important Message</h2>\n    <p>This message should be hidden when the button is clicked.</p>\n  </div>\n\n  <button id=\"hideBtn\">Hide Message</button>\n  <button id=\"showBtn\">Show Message</button>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "/* This exercise does not require any CSS. */\n",
+    "script.js": "// Task: hide the message when \"Hide Message\" is clicked.\n// Optional challenge: show it again when \"Show Message\" is clicked.\n// See TASK.md for details.\n",
+  },
+};
+
+const day1Task11: Task = {
+  id: "day1-11",
+  title: "HTML + CSS Mini Project",
+  description: "Combine everything learned about HTML attributes and CSS styling to turn the plain Student Profile Card into a properly styled card.",
+  track: "HTML + CSS",
+  order: 11,
+  instructions: [
+    "Add id=\"studentStatus\" to the status <span>.",
+    "Add class=\"profile-btn\" to the button.",
+    "Give the card (.card) a visible border, padding, and rounded corners.",
+    "Give the status (#studentStatus) a background colour so it stands out.",
+    "Style the button (.profile-btn) with a background colour and text colour.",
+    "Add appropriate spacing (margin) between the elements inside the card.",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Student Profile Card</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n\n  <h1>Student Profile Card</h1>\n\n  <div class=\"card\">\n    <h2>Student Profile</h2>\n    <p>Name: Ananya</p>\n    <p>Roll No: 24AG1A05T2</p>\n    <p>Status: <span>Active</span></p>\n    <button>View Profile</button>\n  </div>\n\n</body>\n</html>\n",
+    "style.css": "body {\n  font-family: Arial, sans-serif;\n  max-width: 600px;\n  margin: 40px auto;\n  padding: 0 16px;\n  background-color: #f4f6f9;\n}\n\nh1 {\n  color: #1f2a44;\n}\n\n.card {\n  background-color: #fff;\n}\n\n.card h2 {\n  margin-top: 0;\n}\n\n/* TODO (Student HTML + CSS objectives):\n   1. Add id=\"studentStatus\" to the status <span> in index.html.\n   2. Add class=\"profile-btn\" to the button in index.html.\n   3. Style the .card below: border, padding, rounded corners, spacing.\n   4. Style #studentStatus with a background colour.\n   5. Style .profile-btn.\n   See TASK.md for exact requirements. */\n",
+    "script.js": "// This exercise does not require any JavaScript.\n",
+  },
+};
+
+const day1Task12: Task = {
+  id: "day1-12",
+  title: "Full Project: Course Registration",
+  description: "The final Day 1 exercise: combine HTML attributes, CSS styling, and JavaScript selection, events, conditions, and popups into one working Course Registration form.",
+  track: "Full Project",
+  order: 12,
+  instructions: [
+    "Give the name input id=\"studentName\", the status span id=\"status\", and the button id=\"registerBtn\".",
+    "Style the status (#status) so it stands out visually (background colour and padding).",
+    "Style the button (#registerBtn) with a background colour and text colour, and add spacing so the form doesn't look cramped.",
+    "Select the name input, status element, and register button in script.js.",
+    "Add a click event listener to the register button.",
+    "If the name input is empty when clicked, show a popup: \"Please enter your name.\"",
+    "Otherwise, change the status text to \"Registered\" and show a popup: \"Registration successful!\"",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Course Registration</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n\n  <div class=\"card\">\n    <h1>Course Registration</h1>\n\n    <p class=\"field-label\">Name:</p>\n    <input type=\"text\" />\n\n    <p class=\"field-label\">Course:</p>\n    <input type=\"text\" />\n\n    <p class=\"field-label\">Status: <span>Not Registered</span></p>\n\n    <button>REGISTER</button>\n  </div>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "body {\n  font-family: Arial, sans-serif;\n  max-width: 600px;\n  margin: 40px auto;\n  padding: 0 16px;\n  background-color: #f4f6f9;\n}\n\n.card {\n  background-color: #fff;\n  border: 1px solid #ccc;\n  border-radius: 10px;\n  padding: 24px;\n}\n\n.field-label {\n  font-weight: bold;\n  margin-bottom: 4px;\n}\n\ninput {\n  width: 100%;\n  padding: 8px;\n  margin-bottom: 16px;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n  box-sizing: border-box;\n}\n\n/* TODO (Student CSS objectives):\n   4. Style the status span so it stands out.\n   5. Style the button.\n   6. Add appropriate spacing.\n   See TASK.md for exact requirements. */\n",
+    "script.js": "// Task: wire up the Course Registration form.\n// See TASK.md for details.\n",
+  },
+};
+
+export const tasks: Task[] = [task01, task02, task03, task04, task05, task06, day1Task01, day1Task02, day1Task03, day1Task04, day1Task05, day1Task06, day1Task07, day1Task08, day1Task09, day1Task10, day1Task11, day1Task12];
 
 export function getTaskById(taskId: string): Task | undefined {
   return tasks.find((task) => task.id === taskId);
