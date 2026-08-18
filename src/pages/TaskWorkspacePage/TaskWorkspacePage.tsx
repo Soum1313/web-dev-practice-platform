@@ -6,13 +6,16 @@ import { FileTabs } from "../../components/FileTabs/FileTabs";
 import { CodeEditor } from "../../components/CodeEditor/CodeEditor";
 import { Preview } from "../../components/Preview/Preview";
 import { Console, type ConsoleEntry } from "../../components/Console/Console";
+import { TestResults } from "../../components/TestResults/TestResults";
 import { Timer } from "../../components/Timer/Timer";
 import { ResetButton } from "../../components/ResetButton/ResetButton";
 import { SubmitButton } from "../../components/SubmitButton/SubmitButton";
 import { getTaskById } from "../../data/tasks";
+import { validators } from "../../data/validators";
 import { useTaskProgress } from "../../hooks/useTaskProgress";
 import { useTimer } from "../../hooks/useTimer";
 import { usePreview } from "../../hooks/usePreview";
+import { useValidation } from "../../hooks/useValidation";
 import type { PreviewMessage } from "../../types/preview";
 import type { Task, TaskFiles } from "../../types/task";
 import "./TaskWorkspacePage.css";
@@ -43,10 +46,19 @@ function TaskWorkspace({ task }: { task: Task }) {
   const { progress, updateFile, startTask, resetTask, submitTask } = useTaskProgress(task);
   const [activeFile, setActiveFile] = useState<keyof TaskFiles>("index.html");
   const [consoleEntries, setConsoleEntries] = useState<ConsoleEntry[]>([]);
+  const [bottomTab, setBottomTab] = useState<"console" | "tests">("console");
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const timer = useTimer(progress, task.timeLimit);
   const { srcDoc, rebuildNow } = usePreview(progress.files);
+  const taskValidators = validators[task.id];
+  const { result: testResult, running: testsRunning, progress: testProgress, run: runTests } = useValidation();
+
+  const handleRunTests = useCallback(() => {
+    if (!taskValidators) return;
+    setBottomTab("tests");
+    runTests(task.id, progress.files, taskValidators);
+  }, [taskValidators, runTests, task.id, progress.files]);
 
   const handleRebuild = useCallback(() => {
     setConsoleEntries([]);
@@ -127,6 +139,11 @@ function TaskWorkspace({ task }: { task: Task }) {
               onChange={(value) => updateFile(activeFile, value)}
             />
             <div className="workspace__run-bar">
+              {taskValidators && (
+                <button className="workspace__test-button" onClick={handleRunTests} disabled={testsRunning}>
+                  ✓ Run Tests
+                </button>
+              )}
               <button className="workspace__run-button" onClick={handleRebuild}>
                 ▶ Run
               </button>
@@ -138,7 +155,36 @@ function TaskWorkspace({ task }: { task: Task }) {
           </div>
 
           <div className="workspace__console">
-            <Console entries={consoleEntries} onClear={() => setConsoleEntries([])} />
+            {taskValidators ? (
+              <>
+                <div className="workspace__bottom-tabs">
+                  <button
+                    className={`workspace__bottom-tab${bottomTab === "console" ? " workspace__bottom-tab--active" : ""}`}
+                    onClick={() => setBottomTab("console")}
+                  >
+                    Console
+                  </button>
+                  <button
+                    className={`workspace__bottom-tab${bottomTab === "tests" ? " workspace__bottom-tab--active" : ""}`}
+                    onClick={() => setBottomTab("tests")}
+                  >
+                    Tests
+                  </button>
+                </div>
+                {bottomTab === "console" ? (
+                  <Console entries={consoleEntries} onClear={() => setConsoleEntries([])} />
+                ) : (
+                  <TestResults
+                    result={testResult}
+                    running={testsRunning}
+                    progress={testProgress}
+                    onRunTests={handleRunTests}
+                  />
+                )}
+              </>
+            ) : (
+              <Console entries={consoleEntries} onClear={() => setConsoleEntries([])} />
+            )}
           </div>
         </div>
       )}

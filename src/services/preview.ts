@@ -73,7 +73,10 @@ function isScriptJsSrc(src: string | null): boolean {
  * appended before </body> if no such tag exists), and a console/error
  * capture shim is injected first so student code can't outrun it.
  */
-export function composeDocument(files: TaskFiles): string {
+export function composeDocument(
+  files: TaskFiles,
+  options?: { extraHeadScript?: string }
+): string {
   const parser = new DOMParser();
   const doc = parser.parseFromString(files["index.html"], "text/html");
 
@@ -86,6 +89,12 @@ export function composeDocument(files: TaskFiles): string {
   const shimScript = doc.createElement("script");
   shimScript.textContent = CONSOLE_SHIM;
   head.insertBefore(shimScript, head.firstChild);
+
+  if (options?.extraHeadScript) {
+    const extraScript = doc.createElement("script");
+    extraScript.textContent = options.extraHeadScript;
+    head.appendChild(extraScript);
+  }
 
   const styleTag = doc.createElement("style");
   styleTag.textContent = files["style.css"];
