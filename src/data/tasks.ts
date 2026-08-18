@@ -496,10 +496,10 @@ const day3Task04: Task = {
 
 const day5FinalSimulation: Task = {
   id: "day5-final-simulation",
-  day: 5,
+  bank: true,
   title: "Employee Leave Request",
   description: "Final Day 5 simulation: complete an unfamiliar Employee Leave Request form end-to-end, combining validation, DOM updates, and a success popup.",
-  order: 1,
+  order: 6,
   instructions: [
     "The status <span> is missing an id - find it and give it an appropriate id so it can be targeted from CSS/JavaScript.",
     "Style the status text so it visually stands out once it changes (e.g. background colour and padding).",
@@ -517,7 +517,7 @@ const day5FinalSimulation: Task = {
 
 const miscTask01: Task = {
   id: "misc-01",
-  bank: true,
+  day: 4,
   title: "Random Background Color",
   description: "Clicking a button changes the page background to a random colour.",
   order: 1,
@@ -536,7 +536,7 @@ const miscTask01: Task = {
 
 const miscTask02: Task = {
   id: "misc-02",
-  bank: true,
+  day: 5,
   title: "Image Showcase",
   description: "Click a thumbnail swatch to display it, enlarged, in the main preview area.",
   order: 2,
@@ -558,7 +558,7 @@ const miscTask03: Task = {
   bank: true,
   title: "Greeting Card Editor",
   description: "Change greeting-card text, text colour, and font size using the provided controls.",
-  order: 3,
+  order: 1,
   instructions: [
     "Select the greeting text element (id=\"greetingText\").",
     "Select the text input (id=\"textInput\"), colour picker (id=\"colorInput\"), and font-size slider (id=\"sizeInput\").",
@@ -575,10 +575,10 @@ const miscTask03: Task = {
 
 const miscTask04: Task = {
   id: "misc-04",
-  bank: true,
+  day: 4,
   title: "Modal Popup",
   description: "Open and close an HTML modal with an overlay.",
-  order: 4,
+  order: 2,
   instructions: [
     "Select the \"Open\" button (id=\"openModalBtn\") and the modal overlay (id=\"infoModal\").",
     "Add a click listener to the Open button that reveals the modal (remove the \"hidden\" class from the overlay).",
@@ -594,10 +594,10 @@ const miscTask04: Task = {
 
 const miscTask05: Task = {
   id: "misc-05",
-  bank: true,
+  day: 4,
   title: "Password Validation Form",
   description: "Validate a password and confirm-password field, including a matching-passwords check.",
-  order: 5,
+  order: 3,
   instructions: [
     "Select the password (id=\"password\") and confirm password (id=\"confirmPassword\") inputs, plus the form (id=\"passwordForm\").",
     "On submit, prevent the default page reload.",
@@ -614,10 +614,10 @@ const miscTask05: Task = {
 
 const miscTask06: Task = {
   id: "misc-06",
-  bank: true,
+  day: 5,
   title: "Quiz Page",
   description: "Let the user select an answer, validate their submission, and display whether it was correct.",
-  order: 6,
+  order: 1,
   instructions: [
     "Select all the answer radio buttons (name=\"quizAnswer\") and the Submit button (id=\"submitQuizBtn\").",
     "On submit, check whether any option was selected at all - if not, show an error in the result element.",
@@ -633,10 +633,10 @@ const miscTask06: Task = {
 
 const miscTask07: Task = {
   id: "misc-07",
-  bank: true,
+  day: 4,
   title: "Search / Filter",
   description: "Filter a list of items as the user types into a search box.",
-  order: 7,
+  order: 4,
   instructions: [
     "Select the search input (id=\"searchInput\") and all list items (class=\"filter-item\").",
     "Listen for the \"input\" event on the search box.",
@@ -652,10 +652,10 @@ const miscTask07: Task = {
 
 const miscTask08: Task = {
   id: "misc-08",
-  bank: true,
+  day: 4,
   title: "Tab Navigation",
   description: "Clicking Profile / Courses / Results tabs shows the corresponding content panel.",
-  order: 8,
+  order: 5,
   instructions: [
     "Select all tab buttons (class=\"tab-btn\") and all content panels (class=\"tab-panel\").",
     "Add a click listener to each tab button.",
@@ -671,10 +671,10 @@ const miscTask08: Task = {
 
 const miscTask09: Task = {
   id: "misc-09",
-  bank: true,
+  day: 5,
   title: "Image Carousel",
   description: "Implement Previous/Next controls for a colour-slide carousel.",
-  order: 9,
+  order: 3,
   instructions: [
     "Select the Previous (id=\"prevBtn\") and Next (id=\"nextBtn\") buttons, the slide display (id=\"slideDisplay\"), and the counter text (id=\"slideCounter\").",
     "Keep track of the current slide index in a variable (the `slides` array is already provided).",
@@ -691,10 +691,10 @@ const miscTask09: Task = {
 
 const miscTask10: Task = {
   id: "misc-10",
-  bank: true,
+  day: 5,
   title: "Dynamic Photo Gallery",
   description: "Given a caption input and Add button, add photo cards to a gallery and allow removing them.",
-  order: 10,
+  order: 4,
   instructions: [
     "Select the caption input (id=\"photoCaption\") and the Add button (id=\"addPhotoBtn\").",
     "Select the gallery container (id=\"gallery\").",
@@ -709,7 +709,84 @@ const miscTask10: Task = {
   },
 };
 
-export const tasks: Task[] = [task01, task02, task03, task04, task05, task06, day1Task01, day1Task02, day1Task03, day1Task04, day1Task05, day1Task06, day1Task07, day1Task08, day1Task09, day1Task10, day1Task11, day1Task12, day3Task03, day3Task04, day5FinalSimulation, miscTask01, miscTask02, miscTask03, miscTask04, miscTask05, miscTask06, miscTask07, miscTask08, miscTask09, miscTask10];
+const miscTask11: Task = {
+  id: "misc-11",
+  bank: true,
+  title: "Checklist / Mark Complete",
+  description: "Clicking a checklist item should mark it complete, with a strikethrough style, and toggle back when clicked again.",
+  order: 2,
+  instructions: [
+    "Select all checklist items (class=\"checklist-item\").",
+    "Add a click event listener to each item.",
+    "On click, toggle a \"completed\" class on that item (CSS for the strikethrough style already exists).",
+    "Each item must work independently of the others.",
+    "Repeated clicks should correctly flip the item back and forth every time.",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Prep Checklist</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n  <header class=\"topbar\">\n    <h1>Preparation Checklist</h1>\n  </header>\n\n  <main class=\"container\">\n    <ul class=\"checklist\">\n      <li class=\"checklist-item\">\n        <span class=\"checkbox\"></span>\n        <span class=\"item-text\">Complete HTML exercises</span>\n      </li>\n      <li class=\"checklist-item\">\n        <span class=\"checkbox\"></span>\n        <span class=\"item-text\">Complete CSS exercises</span>\n      </li>\n      <li class=\"checklist-item\">\n        <span class=\"checkbox\"></span>\n        <span class=\"item-text\">Complete JavaScript exercises</span>\n      </li>\n      <li class=\"checklist-item\">\n        <span class=\"checkbox\"></span>\n        <span class=\"item-text\">Attempt a mock assessment</span>\n      </li>\n    </ul>\n  </main>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: \"Segoe UI\", Arial, sans-serif;\n  background-color: #f4f6f9;\n  color: #222;\n}\n\n.topbar {\n  background-color: #1f2a44;\n  color: #fff;\n  padding: 18px 32px;\n}\n\n.topbar h1 {\n  margin: 0;\n  font-size: 22px;\n}\n\n.container {\n  max-width: 420px;\n  margin: 40px auto;\n  padding: 0 16px;\n}\n\n.checklist {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  background-color: #fff;\n  border-radius: 10px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);\n  overflow: hidden;\n}\n\n.checklist-item {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  padding: 14px 18px;\n  border-bottom: 1px solid #eee;\n  cursor: pointer;\n  font-size: 14px;\n}\n\n.checklist-item:last-child {\n  border-bottom: none;\n}\n\n.checklist-item:hover {\n  background-color: #f9fafb;\n}\n\n.checkbox {\n  width: 18px;\n  height: 18px;\n  border-radius: 4px;\n  border: 2px solid #ccc;\n  flex-shrink: 0;\n  position: relative;\n}\n\n.checklist-item.completed .checkbox {\n  background-color: #2f9e44;\n  border-color: #2f9e44;\n}\n\n.checklist-item.completed .checkbox::after {\n  content: \"\";\n  position: absolute;\n  left: 4px;\n  top: 0px;\n  width: 5px;\n  height: 9px;\n  border: solid #fff;\n  border-width: 0 2px 2px 0;\n  transform: rotate(45deg);\n}\n\n.checklist-item.completed .item-text {\n  text-decoration: line-through;\n  color: #999;\n}\n",
+    "script.js": "// Checklist / Mark Complete - script.js\n//\n// Read TASK.md for the exact objectives you must complete.\n\nconst checklistItems = document.querySelectorAll(\".checklist-item\");\n\nconsole.log(`Found ${checklistItems.length} checklist items.`);\n\n// TODO (Student JavaScript objectives):\n//\n// For EACH item in `checklistItems`, you need to:\n//\n// 1. Attach a \"click\" event listener.\n// 2. On click, toggle the \"completed\" class on that item (CSS for the\n//    checked box and strikethrough text already exists).\n// 3. Make sure each item works independently of the others.\n// 4. Make sure repeated clicks correctly flip the item back and forth\n//    every time.\n//\n// See TASK.md for full requirements.\n",
+  },
+};
+
+const miscTask12: Task = {
+  id: "misc-12",
+  bank: true,
+  title: "Fruit Selector",
+  description: "Changing a dropdown selection should update the displayed fruit name and emoji.",
+  order: 3,
+  instructions: [
+    "Select the dropdown (id=\"fruitSelect\") and the display element (id=\"fruitDisplay\").",
+    "Listen for the \"change\" event on the dropdown.",
+    "When it changes, read the selected option's value.",
+    "Update the display element's text to show the matching fruit emoji and name (a lookup object is already provided).",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Fruit Selector</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n  <header class=\"topbar\">\n    <h1>Fruit Selector</h1>\n  </header>\n\n  <main class=\"container\">\n    <div class=\"card\">\n      <label for=\"fruitSelect\">Select a fruit</label>\n      <select id=\"fruitSelect\">\n        <option value=\"apple\">Apple</option>\n        <option value=\"banana\">Banana</option>\n        <option value=\"grapes\">Grapes</option>\n        <option value=\"watermelon\">Watermelon</option>\n      </select>\n\n      <div id=\"fruitDisplay\" class=\"fruit-display\">&#127822; Apple</div>\n    </div>\n  </main>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: \"Segoe UI\", Arial, sans-serif;\n  background-color: #f4f6f9;\n  color: #222;\n}\n\n.topbar {\n  background-color: #1f2a44;\n  color: #fff;\n  padding: 18px 32px;\n}\n\n.topbar h1 {\n  margin: 0;\n  font-size: 22px;\n}\n\n.container {\n  max-width: 360px;\n  margin: 40px auto;\n  padding: 0 16px;\n}\n\n.card {\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 24px;\n  text-align: center;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);\n}\n\nlabel {\n  display: block;\n  font-size: 13px;\n  font-weight: 600;\n  margin-bottom: 8px;\n  text-align: left;\n}\n\nselect {\n  width: 100%;\n  padding: 10px 12px;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n  font-size: 14px;\n}\n\n.fruit-display {\n  margin-top: 24px;\n  font-size: 24px;\n  font-weight: 600;\n}\n",
+    "script.js": "// Fruit Selector - script.js\n//\n// Read TASK.md for the exact objectives you must complete.\n\nconst fruitSelect = document.getElementById(\"fruitSelect\");\nconst fruitDisplay = document.getElementById(\"fruitDisplay\");\n\nconst FRUIT_LOOKUP = {\n  apple: \"\\uD83C\\uDF4E Apple\",\n  banana: \"\\uD83C\\uDF4C Banana\",\n  grapes: \"\\uD83C\\uDF47 Grapes\",\n  watermelon: \"\\uD83C\\uDF49 Watermelon\",\n};\n\n// TODO (Student JavaScript objectives):\n//\n// 1. Attach a \"change\" event listener to `fruitSelect`.\n// 2. When it fires, read the dropdown's current value\n//    (fruitSelect.value).\n// 3. Look up the matching display text in FRUIT_LOOKUP.\n// 4. Set fruitDisplay's text content to that value.\n//\n// See TASK.md for full requirements.\n",
+  },
+};
+
+const miscTask13: Task = {
+  id: "misc-13",
+  bank: true,
+  title: "Star Rating",
+  description: "Hovering over stars should preview a rating, and clicking should lock it in.",
+  order: 4,
+  instructions: [
+    "Select all star elements (class=\"star\") and the rating label (id=\"ratingLabel\").",
+    "Add a \"mouseover\" listener to each star that highlights it and every star before it (their combined position), to preview the hovered rating.",
+    "Add a \"mouseout\" listener on the star container that restores the display to the currently saved rating (not hovered).",
+    "Add a click listener to each star that saves its position as the selected rating, highlighting it and all stars before it, and updates the rating label text (e.g. \"3 / 5\").",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Star Rating</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n  <header class=\"topbar\">\n    <h1>Rate Your Experience</h1>\n  </header>\n\n  <main class=\"container\">\n    <div class=\"card\">\n      <div id=\"starContainer\" class=\"stars\">\n        <span class=\"star\" data-value=\"1\">&#9733;</span>\n        <span class=\"star\" data-value=\"2\">&#9733;</span>\n        <span class=\"star\" data-value=\"3\">&#9733;</span>\n        <span class=\"star\" data-value=\"4\">&#9733;</span>\n        <span class=\"star\" data-value=\"5\">&#9733;</span>\n      </div>\n      <p id=\"ratingLabel\" class=\"rating-label\">No rating yet</p>\n    </div>\n  </main>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: \"Segoe UI\", Arial, sans-serif;\n  background-color: #f4f6f9;\n  color: #222;\n}\n\n.topbar {\n  background-color: #1f2a44;\n  color: #fff;\n  padding: 18px 32px;\n}\n\n.topbar h1 {\n  margin: 0;\n  font-size: 22px;\n}\n\n.container {\n  max-width: 360px;\n  margin: 40px auto;\n  padding: 0 16px;\n}\n\n.card {\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 28px;\n  text-align: center;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);\n}\n\n.stars {\n  font-size: 32px;\n  display: flex;\n  justify-content: center;\n  gap: 6px;\n}\n\n.star {\n  color: #ccc;\n  cursor: pointer;\n  transition: color 0.1s ease;\n}\n\n.star.active {\n  color: #f2c94c;\n}\n\n.rating-label {\n  margin: 14px 0 0;\n  color: #555;\n  font-size: 14px;\n}\n",
+    "script.js": "// Star Rating - script.js\n//\n// Read TASK.md for the exact objectives you must complete.\n\nconst starContainer = document.getElementById(\"starContainer\");\nconst stars = document.querySelectorAll(\".star\");\nconst ratingLabel = document.getElementById(\"ratingLabel\");\n\nlet selectedRating = 0;\n\nfunction highlightUpTo(value) {\n  stars.forEach((star) => {\n    const starValue = Number(star.dataset.value);\n    star.classList.toggle(\"active\", starValue <= value);\n  });\n}\n\n// TODO (Student JavaScript objectives):\n//\n// For EACH star in `stars`, you need to:\n//\n// 1. Attach a \"mouseover\" listener that reads that star's data-value\n//    and calls highlightUpTo(value) to preview the hover rating.\n// 2. Attach a \"click\" listener that stores that star's value in\n//    `selectedRating`, calls highlightUpTo(selectedRating), and updates\n//    `ratingLabel`'s text to something like `${selectedRating} / 5`.\n//\n// Also:\n//\n// 3. Attach a \"mouseout\" listener to `starContainer` (the whole group)\n//    that calls highlightUpTo(selectedRating), so the stars fall back\n//    to the last clicked rating once the mouse leaves - rather than\n//    staying on whatever was last hovered.\n//\n// See TASK.md for full requirements.\n",
+  },
+};
+
+const miscTask14: Task = {
+  id: "misc-14",
+  bank: true,
+  title: "Color Picker",
+  description: "Changing a colour input should immediately update a preview box's background colour.",
+  order: 5,
+  instructions: [
+    "Select the colour input (id=\"colorPicker\") and the preview box (id=\"colorPreview\").",
+    "Listen for the \"input\" event on the colour picker (fires continuously as the user drags/selects, not just on close).",
+    "Update the preview box's background colour to match the picker's current value on every change.",
+    "Also display the selected colour's hex value as text inside or below the preview box.",
+  ],
+  starterFiles: {
+    "index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Color Picker</title>\n  <link rel=\"stylesheet\" href=\"style.css\" />\n</head>\n<body>\n  <header class=\"topbar\">\n    <h1>Color Picker</h1>\n  </header>\n\n  <main class=\"container\">\n    <div class=\"card\">\n      <label for=\"colorPicker\">Choose a colour</label>\n      <input type=\"color\" id=\"colorPicker\" value=\"#2f6fed\" />\n\n      <div id=\"colorPreview\" class=\"preview-box\"></div>\n      <p id=\"colorValue\" class=\"color-value\">#2f6fed</p>\n    </div>\n  </main>\n\n  <script src=\"script.js\"></script>\n</body>\n</html>\n",
+    "style.css": "* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n  font-family: \"Segoe UI\", Arial, sans-serif;\n  background-color: #f4f6f9;\n  color: #222;\n}\n\n.topbar {\n  background-color: #1f2a44;\n  color: #fff;\n  padding: 18px 32px;\n}\n\n.topbar h1 {\n  margin: 0;\n  font-size: 22px;\n}\n\n.container {\n  max-width: 360px;\n  margin: 40px auto;\n  padding: 0 16px;\n}\n\n.card {\n  background-color: #fff;\n  border-radius: 10px;\n  padding: 24px;\n  text-align: center;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);\n}\n\nlabel {\n  display: block;\n  font-size: 13px;\n  font-weight: 600;\n  margin-bottom: 10px;\n}\n\ninput[type=\"color\"] {\n  width: 100%;\n  height: 42px;\n  border: 1px solid #ccc;\n  border-radius: 6px;\n  cursor: pointer;\n}\n\n.preview-box {\n  margin-top: 20px;\n  height: 100px;\n  border-radius: 8px;\n  background-color: #2f6fed;\n  transition: background-color 0.05s ease;\n}\n\n.color-value {\n  margin: 10px 0 0;\n  font-family: \"SFMono-Regular\", Consolas, monospace;\n  font-size: 14px;\n  color: #555;\n}\n",
+    "script.js": "// Color Picker - script.js\n//\n// Read TASK.md for the exact objectives you must complete.\n\nconst colorPicker = document.getElementById(\"colorPicker\");\nconst colorPreview = document.getElementById(\"colorPreview\");\nconst colorValue = document.getElementById(\"colorValue\");\n\n// TODO (Student JavaScript objectives):\n//\n// 1. Attach an \"input\" event listener to `colorPicker` (this fires\n//    continuously as the colour changes, unlike \"change\" which only\n//    fires once the picker closes).\n// 2. On every input, read `colorPicker.value` (a hex string like\n//    \"#2f6fed\").\n// 3. Set `colorPreview`'s background colour to that value.\n// 4. Set `colorValue`'s text to that same hex string.\n//\n// See TASK.md for full requirements.\n",
+  },
+};
+
+export const tasks: Task[] = [task01, task02, task03, task04, task05, task06, day1Task01, day1Task02, day1Task03, day1Task04, day1Task05, day1Task06, day1Task07, day1Task08, day1Task09, day1Task10, day1Task11, day1Task12, day3Task03, day3Task04, day5FinalSimulation, miscTask01, miscTask02, miscTask03, miscTask04, miscTask05, miscTask06, miscTask07, miscTask08, miscTask09, miscTask10, miscTask11, miscTask12, miscTask13, miscTask14];
 
 export function getTaskById(taskId: string): Task | undefined {
   return tasks.find((task) => task.id === taskId);

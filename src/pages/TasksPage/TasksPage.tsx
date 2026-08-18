@@ -13,6 +13,7 @@ const byOrder = (a: { order?: number }, b: { order?: number }) => (a.order ?? 0)
 const day1Tasks = tasks.filter((task) => task.day === 1);
 const day2Tasks = tasks.filter((task) => task.day === 2).sort(byOrder);
 const day3Tasks = tasks.filter((task) => task.day === 3).sort(byOrder);
+const day4Tasks = tasks.filter((task) => task.day === 4).sort(byOrder);
 const day5Tasks = tasks.filter((task) => task.day === 5).sort(byOrder);
 const bankTasks = tasks.filter((task) => task.bank).sort(byOrder);
 
@@ -66,19 +67,22 @@ export function TasksPage() {
         </section>
 
         <section className="tasks-page__section">
-          <h2 className="tasks-page__section-title">Day 4 — Independent Practice</h2>
+          <h2 className="tasks-page__section-title">Day 4 — Independent Pattern Practice</h2>
           <p className="tasks-page__section-hint">
-            No new tasks today — revisit the Day 2 and Day 3 tasks above independently, with
-            no walkthrough. Struggling with a task? Explain the requirement, the element
-            involved, and what you've tried before asking for a hint.
+            No walkthroughs from here on. Attempt → run → check against the requirements →
+            debug → fix → re-run. Ask for a hint only after you can explain what you've
+            already tried.
           </p>
+          <div className="roadmap">
+            <RoadmapPath steps={day4Tasks} statusByTaskId={statusByTaskId} />
+          </div>
         </section>
 
         <section className="tasks-page__section">
-          <h2 className="tasks-page__section-title">Day 5 — Final Simulation</h2>
+          <h2 className="tasks-page__section-title">Day 5 — Independent Challenge Practice</h2>
           <p className="tasks-page__section-hint">
-            One fresh, unfamiliar project. No lecture, no walkthrough, no solution until
-            you've attempted and self-debugged it.
+            Somewhat harder, unfamiliar patterns. Work at your own pace — you don't need to
+            finish every task before moving to the next one.
           </p>
           <div className="roadmap">
             <RoadmapPath steps={day5Tasks} statusByTaskId={statusByTaskId} />
@@ -88,8 +92,8 @@ export function TasksPage() {
         <section className="tasks-page__section">
           <h2 className="tasks-page__section-title">Practice Bank</h2>
           <p className="tasks-page__section-hint">
-            Optional extra pattern practice — not tied to a specific day. Pick a few, not
-            all ten.
+            Optional extra pattern practice — not tied to a specific day. Useful for students
+            who finish early or want more exposure at home.
           </p>
           <TaskList tasks={bankTasks} statusByTaskId={statusByTaskId} />
         </section>
