@@ -3,19 +3,12 @@ import { Header } from "../../components/Header/Header";
 import { TaskList } from "../../components/TaskList/TaskList";
 import { Roadmap } from "../../components/Roadmap/Roadmap";
 import { RoadmapPath } from "../../components/Roadmap/RoadmapPath";
+import { Footer } from "../../components/Footer/Footer";
 import { tasks } from "../../data/tasks";
+import { day1Tasks, day2Tasks, day3Tasks, day4Tasks, day5Tasks, bankTasks } from "../../data/taskGroups";
 import { loadStatusByTaskId } from "../../services/persistence";
 import type { TaskStatus } from "../../types/task";
 import "./TasksPage.css";
-
-const byOrder = (a: { order?: number }, b: { order?: number }) => (a.order ?? 0) - (b.order ?? 0);
-
-const day1Tasks = tasks.filter((task) => task.day === 1);
-const day2Tasks = tasks.filter((task) => task.day === 2).sort(byOrder);
-const day3Tasks = tasks.filter((task) => task.day === 3).sort(byOrder);
-const day4Tasks = tasks.filter((task) => task.day === 4).sort(byOrder);
-const day5Tasks = tasks.filter((task) => task.day === 5).sort(byOrder);
-const bankTasks = tasks.filter((task) => task.bank).sort(byOrder);
 
 export function TasksPage() {
   const [statusByTaskId, setStatusByTaskId] = useState<Record<string, TaskStatus>>({});
@@ -98,6 +91,7 @@ export function TasksPage() {
           <TaskList tasks={bankTasks} statusByTaskId={statusByTaskId} />
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
+import { DayNav } from "../../components/DayNav/DayNav";
 import { TaskInstructions } from "../../components/TaskInstructions/TaskInstructions";
 import { FileTabs } from "../../components/FileTabs/FileTabs";
 import { CodeEditor } from "../../components/CodeEditor/CodeEditor";
@@ -10,14 +11,15 @@ import { TestResults } from "../../components/TestResults/TestResults";
 import { Timer } from "../../components/Timer/Timer";
 import { ResetButton } from "../../components/ResetButton/ResetButton";
 import { SubmitButton } from "../../components/SubmitButton/SubmitButton";
-import { getTaskById } from "../../data/tasks";
+import { getTaskById, tasks } from "../../data/tasks";
 import { validators } from "../../data/validators";
 import { useTaskProgress } from "../../hooks/useTaskProgress";
 import { useTimer } from "../../hooks/useTimer";
 import { usePreview } from "../../hooks/usePreview";
 import { useValidation } from "../../hooks/useValidation";
+import { loadStatusByTaskId } from "../../services/persistence";
 import type { PreviewMessage } from "../../types/preview";
-import type { Task, TaskFiles } from "../../types/task";
+import type { Task, TaskFiles, TaskStatus } from "../../types/task";
 import "./TaskWorkspacePage.css";
 
 let consoleEntryId = 0;
@@ -47,7 +49,13 @@ function TaskWorkspace({ task }: { task: Task }) {
   const [activeFile, setActiveFile] = useState<keyof TaskFiles>("index.html");
   const [consoleEntries, setConsoleEntries] = useState<ConsoleEntry[]>([]);
   const [bottomTab, setBottomTab] = useState<"console" | "tests">("console");
+  const [statusByTaskId, setStatusByTaskId] = useState<Record<string, TaskStatus>>({});
+  const [navCollapsed, setNavCollapsed] = useState(true);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    setStatusByTaskId(loadStatusByTaskId(tasks.map((t) => t.id)));
+  }, []);
 
   const timer = useTimer(progress, task.timeLimit);
   const { srcDoc, rebuildNow } = usePreview(progress.files);
@@ -121,7 +129,18 @@ function TaskWorkspace({ task }: { task: Task }) {
       {isNotStarted ? (
         <StartScreen task={task} onStart={startTask} />
       ) : (
-        <div className="workspace__body">
+        <div
+          className={`workspace__body${navCollapsed ? " workspace__body--nav-collapsed" : ""}`}
+        >
+          <div className="workspace__panel workspace__daynav">
+            <DayNav
+              currentTaskId={task.id}
+              statusByTaskId={{ ...statusByTaskId, [task.id]: progress.status }}
+              collapsed={navCollapsed}
+              onToggleCollapsed={() => setNavCollapsed((prev) => !prev)}
+            />
+          </div>
+
           <div className="workspace__panel workspace__instructions">
             <TaskInstructions task={task} />
             {isSubmitted && (

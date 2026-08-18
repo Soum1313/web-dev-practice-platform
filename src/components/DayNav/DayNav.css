@@ -1,0 +1,148 @@
+.day-nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #16171f;
+}
+
+.day-nav__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #262738;
+  flex-shrink: 0;
+}
+
+.day-nav--collapsed .day-nav__top {
+  justify-content: center;
+}
+
+.day-nav__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #9a9ab0;
+  cursor: pointer;
+}
+
+.day-nav__toggle:hover {
+  color: #f5f5fa;
+  border-color: #33344a;
+  background: #1e1f30;
+}
+
+.day-nav__home {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #b3b3c6;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.day-nav__home:hover {
+  color: #f5f5fa;
+  background: #1e1f30;
+}
+
+.day-nav__sections {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.day-nav__section {
+  border-bottom: 1px solid #202132;
+}
+
+.day-nav__section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  color: #c7c7d6;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.day-nav__section-header:hover {
+  background: #1c1d2c;
+  color: #f5f5fa;
+}
+
+.day-nav__chevron {
+  color: #55566b;
+  font-size: 0.68rem;
+  transition: transform 0.15s ease;
+}
+
+.day-nav__chevron--open {
+  transform: rotate(90deg);
+  color: #a29bfe;
+}
+
+.day-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0 8px;
+}
+
+.day-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 14px 6px 26px;
+  color: #8f90a6;
+  text-decoration: none;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  border-left: 2px solid transparent;
+}
+
+.day-nav__link:hover {
+  background: #1c1d2c;
+  color: #f5f5fa;
+}
+
+.day-nav__link--current {
+  background: rgba(108, 92, 231, 0.12);
+  color: #f5f5fa;
+  border-left-color: #6c5ce7;
+  font-weight: 600;
+}
+
+.day-nav__status {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  color: #55566b;
+}
+
+.day-nav__status--submitted {
+  color: #4dd08a;
+}
+
+.day-nav__status--in-progress {
+  color: #f2c94c;
+}
+
+.day-nav__link-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
