@@ -1,0 +1,27 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #1e1e2e;
+  border-bottom: 1px solid #33344a;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.app-header__brand {
+  color: #f5f5fa;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.app-header__brand:hover {
+  color: #a29bfe;
+}
+
+.app-header__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

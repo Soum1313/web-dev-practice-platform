@@ -1,0 +1,78 @@
+.console {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #181926;
+  color: #d8d8e6;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.8rem;
+}
+
+.console__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-bottom: 1px solid #2c2d40;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.console__title {
+  font-weight: 600;
+  color: #9a9ab0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.console__clear {
+  background: transparent;
+  border: 1px solid #33344a;
+  color: #9a9ab0;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.console__clear:hover {
+  color: #f5f5fa;
+  border-color: #6c5ce7;
+}
+
+.console__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.console__empty {
+  padding: 8px 12px;
+  color: #62637a;
+}
+
+.console__entry {
+  display: flex;
+  gap: 8px;
+  padding: 3px 12px;
+  border-bottom: 1px solid #1f2032;
+}
+
+.console__text {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.console__entry--warn {
+  color: #f2c94c;
+}
+
+.console__entry--error,
+.console__entry--runtime-error {
+  color: #f56565;
+}
+
+.console__icon {
+  flex-shrink: 0;
+}

@@ -1,0 +1,136 @@
+.workspace {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #1a1b26;
+}
+
+.workspace__not-found {
+  padding: 60px;
+  text-align: center;
+  color: #d8d8e6;
+}
+
+.workspace__not-found a {
+  color: #a29bfe;
+}
+
+.workspace__start {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  padding: 40px;
+}
+
+.workspace__start-eyebrow {
+  font-size: 0.7rem;
+  color: #6c5ce7;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.workspace__start h1 {
+  color: #f5f5fa;
+  font-size: 1.8rem;
+  margin: 4px 0 8px;
+}
+
+.workspace__start p {
+  color: #9a9ab0;
+  max-width: 420px;
+  margin: 0 0 24px;
+}
+
+.workspace__start-button {
+  background: #6c5ce7;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.workspace__start-button:hover {
+  background: #7d6bf0;
+}
+
+.workspace__body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  grid-template-rows: 1fr 220px;
+  grid-template-areas:
+    "instructions editor preview"
+    "console console console";
+}
+
+.workspace__panel {
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #262738;
+}
+
+.workspace__instructions {
+  grid-area: instructions;
+  background: #1e1e2e;
+  position: relative;
+}
+
+.workspace__submitted-banner {
+  background: rgba(77, 208, 138, 0.12);
+  color: #4dd08a;
+  padding: 10px 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-top: 1px solid #33344a;
+}
+
+.workspace__editor {
+  grid-area: editor;
+  background: #1e1e2e;
+}
+
+.workspace__preview {
+  grid-area: preview;
+  border-right: none;
+}
+
+.workspace__console {
+  grid-area: console;
+  border-top: 1px solid #262738;
+  min-height: 0;
+}
+
+.workspace__run-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 6px 10px;
+  background: #1e1e2e;
+  border-top: 1px solid #33344a;
+}
+
+.workspace__run-button {
+  background: #4dd08a;
+  border: none;
+  color: #0f1a14;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.workspace__run-button:hover {
+  background: #5fe09b;
+}
