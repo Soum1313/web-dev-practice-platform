@@ -7,7 +7,7 @@
 
 .timer__label {
   font-size: 0.68rem;
-  color: #9a9ab0;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -15,10 +15,10 @@
 .timer__value {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 1.05rem;
-  color: #f5f5fa;
+  color: var(--text-primary);
   font-variant-numeric: tabular-nums;
 }
 
 .timer--expired .timer__value {
-  color: #f56565;
+  color: var(--danger);
 }

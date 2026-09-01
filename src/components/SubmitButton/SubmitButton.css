@@ -1,6 +1,6 @@
 .submit-button {
-  background: #6c5ce7;
-  border: 1px solid #6c5ce7;
+  background: var(--accent);
+  border: 1px solid var(--accent);
   color: #fff;
   border-radius: 6px;
   padding: 7px 16px;
@@ -10,7 +10,7 @@
 }
 
 .submit-button:hover:not(:disabled) {
-  background: #7d6bf0;
+  background: var(--accent-hover);
 }
 
 .submit-button:disabled {

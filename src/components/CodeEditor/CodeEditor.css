@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: #9a9ab0;
+  color: var(--text-muted);
   font-size: 0.85rem;
-  background: #1e1e2e;
+  background: var(--bg-panel);
 }

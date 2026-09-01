@@ -1,6 +1,6 @@
 .topic-links {
   margin-top: 22px;
-  border-top: 1px solid #2c2d40;
+  border-top: 1px solid var(--border-soft);
   padding-top: 14px;
 }
 
@@ -11,7 +11,7 @@
   justify-content: space-between;
   background: transparent;
   border: none;
-  color: #9a9ab0;
+  color: var(--text-muted);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -21,18 +21,18 @@
 }
 
 .topic-links__header:hover {
-  color: #d8d8e6;
+  color: var(--text-secondary);
 }
 
 .topic-links__chevron {
   font-size: 0.68rem;
-  color: #55566b;
+  color: var(--text-faint-2);
   transition: transform 0.15s ease;
 }
 
 .topic-links__chevron--open {
   transform: rotate(90deg);
-  color: #a29bfe;
+  color: var(--accent-light);
 }
 
 .topic-links__pills {
@@ -50,7 +50,7 @@
   border-radius: 999px;
   background: rgba(108, 92, 231, 0.12);
   border: 1px solid rgba(162, 155, 254, 0.35);
-  color: #a29bfe;
+  color: var(--accent-light);
   font-size: 0.76rem;
   font-weight: 600;
   text-decoration: none;
@@ -59,5 +59,5 @@
 
 .topic-links__pill:hover {
   background: rgba(108, 92, 231, 0.22);
-  color: #cbc4ff;
+  color: var(--accent-light-hover);
 }

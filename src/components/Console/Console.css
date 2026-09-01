@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #181926;
-  color: #d8d8e6;
+  background: var(--bg-raised);
+  color: var(--text-secondary);
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 0.8rem;
 }
@@ -13,13 +13,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 12px;
-  border-bottom: 1px solid #2c2d40;
+  border-bottom: 1px solid var(--border-soft);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .console__title {
   font-weight: 600;
-  color: #9a9ab0;
+  color: var(--text-muted);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -27,8 +27,8 @@
 
 .console__clear {
   background: transparent;
-  border: 1px solid #33344a;
-  color: #9a9ab0;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
   border-radius: 4px;
   padding: 3px 8px;
   font-size: 0.72rem;
@@ -36,8 +36,8 @@
 }
 
 .console__clear:hover {
-  color: #f5f5fa;
-  border-color: #6c5ce7;
+  color: var(--text-primary);
+  border-color: var(--accent);
 }
 
 .console__body {
@@ -48,14 +48,14 @@
 
 .console__empty {
   padding: 8px 12px;
-  color: #62637a;
+  color: var(--text-faint);
 }
 
 .console__entry {
   display: flex;
   gap: 8px;
   padding: 3px 12px;
-  border-bottom: 1px solid #1f2032;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .console__text {
@@ -65,12 +65,12 @@
 }
 
 .console__entry--warn {
-  color: #f2c94c;
+  color: var(--warning);
 }
 
 .console__entry--error,
 .console__entry--runtime-error {
-  color: #f56565;
+  color: var(--danger);
 }
 
 .console__icon {

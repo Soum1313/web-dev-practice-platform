@@ -3,25 +3,44 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  background: #1e1e2e;
-  border-bottom: 1px solid #33344a;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
   height: 48px;
   box-sizing: border-box;
 }
 
 .app-header__brand {
-  color: #f5f5fa;
+  color: var(--text-primary);
   font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
 }
 
 .app-header__brand:hover {
-  color: #a29bfe;
+  color: var(--accent-light);
 }
 
 .app-header__right {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.app-header__theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.app-header__theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: var(--bg-hover);
 }

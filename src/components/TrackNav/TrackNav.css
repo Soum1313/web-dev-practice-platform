@@ -2,7 +2,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #16171f;
+  background: var(--bg-sidebar);
 }
 
 .track-nav__top {
@@ -10,7 +10,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px;
-  border-bottom: 1px solid #262738;
+  border-bottom: 1px solid var(--border-soft);
   flex-shrink: 0;
 }
 
@@ -28,21 +28,21 @@
   background: transparent;
   border: 1px solid transparent;
   border-radius: 6px;
-  color: #9a9ab0;
+  color: var(--text-muted);
   cursor: pointer;
 }
 
 .track-nav__toggle:hover {
-  color: #f5f5fa;
-  border-color: #33344a;
-  background: #1e1f30;
+  color: var(--text-primary);
+  border-color: var(--border);
+  background: var(--bg-hover);
 }
 
 .track-nav__home {
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #b3b3c6;
+  color: var(--text-tertiary);
   text-decoration: none;
   font-size: 0.82rem;
   font-weight: 600;
@@ -53,8 +53,8 @@
 }
 
 .track-nav__home:hover {
-  color: #f5f5fa;
-  background: #1e1f30;
+  color: var(--text-primary);
+  background: var(--bg-hover);
 }
 
 .track-nav__sections {
@@ -63,7 +63,7 @@
 }
 
 .track-nav__section {
-  border-bottom: 1px solid #202132;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .track-nav__section-header {
@@ -73,7 +73,7 @@
   justify-content: space-between;
   background: transparent;
   border: none;
-  color: #c7c7d6;
+  color: var(--text-secondary);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -82,19 +82,19 @@
 }
 
 .track-nav__section-header:hover {
-  background: #1c1d2c;
-  color: #f5f5fa;
+  background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .track-nav__chevron {
-  color: #55566b;
+  color: var(--text-faint-2);
   font-size: 0.68rem;
   transition: transform 0.15s ease;
 }
 
 .track-nav__chevron--open {
   transform: rotate(90deg);
-  color: #a29bfe;
+  color: var(--accent-light);
 }
 
 .track-nav__list {
@@ -108,7 +108,7 @@
   align-items: center;
   gap: 9px;
   padding: 6px 14px 6px 26px;
-  color: #8f90a6;
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 0.76rem;
   line-height: 1.35;
@@ -116,29 +116,29 @@
 }
 
 .track-nav__link:hover {
-  background: #1c1d2c;
-  color: #f5f5fa;
+  background: var(--bg-hover);
+  color: var(--text-primary);
 }
 
 .track-nav__link--current {
   background: rgba(108, 92, 231, 0.12);
-  color: #f5f5fa;
-  border-left-color: #6c5ce7;
+  color: var(--text-primary);
+  border-left-color: var(--accent);
   font-weight: 600;
 }
 
 .track-nav__status {
   flex-shrink: 0;
   font-size: 0.68rem;
-  color: #55566b;
+  color: var(--text-faint-2);
 }
 
 .track-nav__status--submitted {
-  color: #4dd08a;
+  color: var(--success);
 }
 
 .track-nav__status--in-progress {
-  color: #f2c94c;
+  color: var(--warning);
 }
 
 .track-nav__link-text {

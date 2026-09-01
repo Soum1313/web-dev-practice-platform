@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import type { TaskFiles } from "../../types/task";
+import { useTheme } from "../../contexts/ThemeContext";
 import "./CodeEditor.css";
 
 // Lazy-loaded so Monaco's ~2-3MB core doesn't bloat the initial bundle
@@ -19,6 +20,8 @@ type CodeEditorProps = {
 };
 
 export function CodeEditor({ fileName, value, onChange }: CodeEditorProps) {
+  const { theme } = useTheme();
+
   return (
     <div className="code-editor">
       <Suspense fallback={<div className="code-editor__loading">Loading editor…</div>}>
@@ -26,11 +29,11 @@ export function CodeEditor({ fileName, value, onChange }: CodeEditorProps) {
           height="100%"
           language={LANGUAGE_BY_FILE[fileName]}
           value={value}
-          theme="vs-dark"
+          theme={theme === "light" ? "vs-light" : "vs-dark"}
           onChange={(next) => onChange(next ?? "")}
           options={{
             minimap: { enabled: false },
-            fontSize: 13,
+            fontSize: 15,
             automaticLayout: true,
             scrollBeyondLastLine: false,
             tabSize: 2,
