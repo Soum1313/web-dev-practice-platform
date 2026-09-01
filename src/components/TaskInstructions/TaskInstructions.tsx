@@ -1,4 +1,5 @@
 import type { Task } from "../../types/task";
+import { TopicLinks } from "../TopicLinks/TopicLinks";
 import "./TaskInstructions.css";
 
 type TaskInstructionsProps = {
@@ -17,6 +18,7 @@ export function TaskInstructions({ task }: TaskInstructionsProps) {
           <li key={index}>{line}</li>
         ))}
       </ol>
+      <TopicLinks topics={task.topics ?? []} />
     </div>
   );
 }

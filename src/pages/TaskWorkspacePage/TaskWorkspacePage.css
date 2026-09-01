@@ -68,8 +68,8 @@
   grid-template-columns: 210px 260px 1fr 1fr;
   grid-template-rows: 1fr 220px;
   grid-template-areas:
-    "daynav instructions editor preview"
-    "daynav console console console";
+    "tracknav instructions editor preview"
+    "tracknav console console console";
   transition: grid-template-columns 0.18s ease;
 }
 
@@ -86,8 +86,8 @@
   border-right: 1px solid #262738;
 }
 
-.workspace__daynav {
-  grid-area: daynav;
+.workspace__tracknav {
+  grid-area: tracknav;
   background: #1a1b26;
 }
 

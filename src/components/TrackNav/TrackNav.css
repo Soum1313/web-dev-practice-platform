@@ -1,11 +1,11 @@
-.day-nav {
+.track-nav {
   height: 100%;
   display: flex;
   flex-direction: column;
   background: #16171f;
 }
 
-.day-nav__top {
+.track-nav__top {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -14,11 +14,11 @@
   flex-shrink: 0;
 }
 
-.day-nav--collapsed .day-nav__top {
+.track-nav--collapsed .track-nav__top {
   justify-content: center;
 }
 
-.day-nav__toggle {
+.track-nav__toggle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,13 +32,13 @@
   cursor: pointer;
 }
 
-.day-nav__toggle:hover {
+.track-nav__toggle:hover {
   color: #f5f5fa;
   border-color: #33344a;
   background: #1e1f30;
 }
 
-.day-nav__home {
+.track-nav__home {
   display: flex;
   align-items: center;
   gap: 7px;
@@ -52,21 +52,21 @@
   min-width: 0;
 }
 
-.day-nav__home:hover {
+.track-nav__home:hover {
   color: #f5f5fa;
   background: #1e1f30;
 }
 
-.day-nav__sections {
+.track-nav__sections {
   flex: 1;
   overflow-y: auto;
 }
 
-.day-nav__section {
+.track-nav__section {
   border-bottom: 1px solid #202132;
 }
 
-.day-nav__section-header {
+.track-nav__section-header {
   width: 100%;
   display: flex;
   align-items: center;
@@ -81,29 +81,29 @@
   cursor: pointer;
 }
 
-.day-nav__section-header:hover {
+.track-nav__section-header:hover {
   background: #1c1d2c;
   color: #f5f5fa;
 }
 
-.day-nav__chevron {
+.track-nav__chevron {
   color: #55566b;
   font-size: 0.68rem;
   transition: transform 0.15s ease;
 }
 
-.day-nav__chevron--open {
+.track-nav__chevron--open {
   transform: rotate(90deg);
   color: #a29bfe;
 }
 
-.day-nav__list {
+.track-nav__list {
   list-style: none;
   margin: 0;
   padding: 2px 0 8px;
 }
 
-.day-nav__link {
+.track-nav__link {
   display: flex;
   align-items: center;
   gap: 9px;
@@ -115,33 +115,33 @@
   border-left: 2px solid transparent;
 }
 
-.day-nav__link:hover {
+.track-nav__link:hover {
   background: #1c1d2c;
   color: #f5f5fa;
 }
 
-.day-nav__link--current {
+.track-nav__link--current {
   background: rgba(108, 92, 231, 0.12);
   color: #f5f5fa;
   border-left-color: #6c5ce7;
   font-weight: 600;
 }
 
-.day-nav__status {
+.track-nav__status {
   flex-shrink: 0;
   font-size: 0.68rem;
   color: #55566b;
 }
 
-.day-nav__status--submitted {
+.track-nav__status--submitted {
   color: #4dd08a;
 }
 
-.day-nav__status--in-progress {
+.track-nav__status--in-progress {
   color: #f2c94c;
 }
 
-.day-nav__link-text {
+.track-nav__link-text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

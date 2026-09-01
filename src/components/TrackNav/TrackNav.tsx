@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { allGroups } from "../../data/taskGroups";
 import type { TaskStatus } from "../../types/task";
-import "./DayNav.css";
+import "./TrackNav.css";
 
-type DayNavProps = {
+type TrackNavProps = {
   currentTaskId: string;
   statusByTaskId: Record<string, TaskStatus>;
   collapsed: boolean;
@@ -17,15 +17,15 @@ const STATUS_ICON: Record<TaskStatus, string> = {
   submitted: "✓",
 };
 
-export function DayNav({ currentTaskId, statusByTaskId, collapsed, onToggleCollapsed }: DayNavProps) {
+export function TrackNav({ currentTaskId, statusByTaskId, collapsed, onToggleCollapsed }: TrackNavProps) {
   const currentLabel = allGroups.find((g) => g.tasks.some((t) => t.id === currentTaskId))?.label;
   const [openLabel, setOpenLabel] = useState<string | null>(currentLabel ?? allGroups[0].label);
 
   return (
-    <nav className={`day-nav${collapsed ? " day-nav--collapsed" : ""}`} aria-label="Task navigation by day">
-      <div className="day-nav__top">
+    <nav className={`track-nav${collapsed ? " track-nav--collapsed" : ""}`} aria-label="Task navigation by track">
+      <div className="track-nav__top">
         <button
-          className="day-nav__toggle"
+          className="track-nav__toggle"
           onClick={onToggleCollapsed}
           aria-label={collapsed ? "Expand navigation" : "Collapse navigation"}
           aria-expanded={!collapsed}
@@ -41,7 +41,7 @@ export function DayNav({ currentTaskId, statusByTaskId, collapsed, onToggleColla
           </svg>
         </button>
         {!collapsed && (
-          <Link to="/" className="day-nav__home">
+          <Link to="/" className="track-nav__home">
             <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
               <path
                 d="M3.5 11.5 12 4l8.5 7.5"
@@ -66,21 +66,21 @@ export function DayNav({ currentTaskId, statusByTaskId, collapsed, onToggleColla
       </div>
 
       {!collapsed && (
-        <div className="day-nav__sections">
+        <div className="track-nav__sections">
           {allGroups.map((group) => {
             const isOpen = openLabel === group.label;
             return (
-              <div key={group.label} className="day-nav__section">
+              <div key={group.label} className="track-nav__section">
                 <button
-                  className="day-nav__section-header"
+                  className="track-nav__section-header"
                   onClick={() => setOpenLabel(isOpen ? null : group.label)}
                   aria-expanded={isOpen}
                 >
                   <span>{group.label}</span>
-                  <span className={`day-nav__chevron${isOpen ? " day-nav__chevron--open" : ""}`}>▸</span>
+                  <span className={`track-nav__chevron${isOpen ? " track-nav__chevron--open" : ""}`}>▸</span>
                 </button>
                 {isOpen && (
-                  <ul className="day-nav__list">
+                  <ul className="track-nav__list">
                     {group.tasks.map((task) => {
                       const status = statusByTaskId[task.id] ?? "not-started";
                       const isCurrent = task.id === currentTaskId;
@@ -88,12 +88,12 @@ export function DayNav({ currentTaskId, statusByTaskId, collapsed, onToggleColla
                         <li key={task.id}>
                           <Link
                             to={`/task/${task.id}`}
-                            className={`day-nav__link${isCurrent ? " day-nav__link--current" : ""}`}
+                            className={`track-nav__link${isCurrent ? " track-nav__link--current" : ""}`}
                           >
-                            <span className={`day-nav__status day-nav__status--${status}`}>
+                            <span className={`track-nav__status track-nav__status--${status}`}>
                               {STATUS_ICON[status]}
                             </span>
-                            <span className="day-nav__link-text">{task.title}</span>
+                            <span className="track-nav__link-text">{task.title}</span>
                           </Link>
                         </li>
                       );

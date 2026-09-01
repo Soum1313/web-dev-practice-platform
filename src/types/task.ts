@@ -4,7 +4,18 @@ export type TaskFiles = {
   "script.js": string;
 };
 
-export type TaskTrack = "HTML" | "CSS" | "HTML + CSS" | "JavaScript" | "Full Project";
+export type TaskTrack =
+  | "HTML"
+  | "CSS"
+  | "HTML + CSS"
+  | "JavaScript"
+  | "JS Fundamentals"
+  | "Full Project";
+
+export type TopicLink = {
+  label: string;
+  url: string;
+};
 
 export type Task = {
   id: string;
@@ -12,16 +23,15 @@ export type Task = {
   description: string;
   instructions: string[];
   timeLimit?: number; // seconds; if omitted, a stopwatch is shown instead
-  /** Roadmap segment this task belongs to (Day 1 only - HTML/CSS/JS/etc). */
+  /** Topic-based roadmap segment this task belongs to. */
   track?: TaskTrack;
-  /** Position within its track or day, for roadmap node ordering/labelling. */
+  /** Position within its track, for roadmap node ordering/labelling. */
   order?: number;
-  /** Which day of the prep program this task belongs to (1-5). Tasks
-   * without a day are shown in the standalone Practice Bank section. */
-  day?: number;
-  /** Marks a task as part of the optional, unassigned Practice Bank
-   * rather than the day-by-day roadmap. */
+  /** Marks a task as part of the optional Practice Bank rather than a
+   * topic-track roadmap. */
   bank?: boolean;
+  /** Optional MDN/W3Schools links shown as a "Related Topics" accordion. */
+  topics?: TopicLink[];
   starterFiles: TaskFiles;
 };
 

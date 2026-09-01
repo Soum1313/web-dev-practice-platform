@@ -5,9 +5,9 @@ import type { ValidationTest } from "../types/validation";
  * simulated interaction (click/type/submit), never the student's source
  * code, so any correct implementation passes regardless of syntax choice.
  *
- * Covers the Day 2 and Day 3 tasks (task-01..06, day3-03, day3-04) -
- * see AVAILABLE_TASKS.md / the validation brief for the full priority
- * list. Day 1, Day 4/5, and the Practice Bank don't have validators yet.
+ * Covers the JavaScript track (task-01..06, day3-03, day3-04) and the
+ * JS Fundamentals track (jsfund-01..07). HTML, CSS, HTML+CSS, Full
+ * Project, and the Practice Bank don't have validators yet.
  */
 export const validators: Record<string, ValidationTest[]> = {
   "task-01": [
@@ -582,6 +582,287 @@ export const validators: Record<string, ValidationTest[]> = {
         const count = ctx.text("#charCount") === "20";
         const warning = ctx.qs("#charCount")?.classList.contains("warning");
         return count && !warning;
+      },
+    },
+  ],
+  "jsfund-01": [
+    {
+      id: "closures.independent-increment",
+      description: "Incrementing Counter A three times leaves Counter B untouched",
+      points: 30,
+      visibility: "public",
+      hint: "Each createCounter() call must keep its own private count variable via a closure, not a shared/global one.",
+      run: async (ctx) => {
+        ctx.click("#incrementA");
+        ctx.click("#incrementA");
+        ctx.click("#incrementA");
+        await ctx.wait(30);
+        return ctx.text("#displayA") === "3" && ctx.text("#displayB") === "0";
+      },
+    },
+    {
+      id: "closures.independent-both",
+      description: "Counter B updates independently after Counter A has already changed",
+      points: 35,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#incrementA");
+        ctx.click("#incrementA");
+        ctx.click("#incrementA");
+        ctx.click("#incrementB");
+        await ctx.wait(30);
+        return ctx.text("#displayA") === "3" && ctx.text("#displayB") === "1";
+      },
+    },
+    {
+      id: "closures.decrement-independent",
+      description: "Decrementing each counter only affects that counter",
+      points: 35,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.click("#incrementA");
+        ctx.click("#incrementA");
+        ctx.click("#incrementB");
+        ctx.click("#decrementA");
+        ctx.click("#decrementB");
+        await ctx.wait(30);
+        return ctx.text("#displayA") === "1" && ctx.text("#displayB") === "0";
+      },
+    },
+  ],
+  "jsfund-02": [
+    {
+      id: "hof.initial-render",
+      description: "All 5 tasks render on first load",
+      points: 15,
+      visibility: "public",
+      hint: "Call renderTasks(\"all\") once at the bottom of script.js.",
+      run: (ctx) => ctx.qsa("#taskList li").length === 5,
+    },
+    {
+      id: "hof.filter-done",
+      description: "The Done filter shows only completed tasks",
+      points: 30,
+      visibility: "public",
+      hint: "Use tasks.filter(task => task.done) for the Done filter.",
+      run: async (ctx) => {
+        ctx.click("#filterDone");
+        await ctx.wait(30);
+        return ctx.qsa("#taskList li").length === 2;
+      },
+    },
+    {
+      id: "hof.filter-pending",
+      description: "The Pending filter shows only incomplete tasks",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#filterPending");
+        await ctx.wait(30);
+        return ctx.qsa("#taskList li").length === 3;
+      },
+    },
+    {
+      id: "hof.active-filter-style",
+      description: "Clicking a filter button marks it active",
+      points: 25,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.click("#filterDone");
+        await ctx.wait(30);
+        return !!ctx.qs("#filterDone")?.classList.contains("active");
+      },
+    },
+  ],
+  "jsfund-03": [
+    {
+      id: "promise.immediate-loading",
+      description: "Clicking Load Profile immediately shows a loading state",
+      points: 25,
+      visibility: "public",
+      hint: "Set the loading text synchronously, before awaiting fetchProfile().",
+      run: async (ctx) => {
+        ctx.click("#loadBtn");
+        return ctx.text("#status") === "Loading...";
+      },
+    },
+    {
+      id: "promise.settles",
+      description: "The status updates once the promise settles",
+      points: 25,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#loadBtn");
+        await ctx.wait(1500);
+        const status = ctx.text("#status");
+        return status === "Loaded" || status === "Failed to load profile. Try again.";
+      },
+    },
+    {
+      id: "promise.result-consistency",
+      description: "The profile card matches the reported status",
+      points: 30,
+      visibility: "public",
+      hint: "On success show the name and role; on failure leave the profile card empty.",
+      run: async (ctx) => {
+        ctx.click("#loadBtn");
+        await ctx.wait(1500);
+        const status = ctx.text("#status");
+        if (status === "Loaded") {
+          const card = ctx.text("#profileCard") ?? "";
+          return card.includes("Ananya") && card.includes("Frontend Developer");
+        }
+        return (ctx.text("#profileCard") ?? "") === "";
+      },
+    },
+    {
+      id: "promise.reload-resets-loading",
+      description: "Clicking Load Profile again shows the loading state again",
+      points: 20,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.click("#loadBtn");
+        await ctx.wait(1500);
+        ctx.click("#loadBtn");
+        return ctx.text("#status") === "Loading...";
+      },
+    },
+  ],
+  "jsfund-04": [
+    {
+      id: "eventloop.three-entries",
+      description: "Running once produces exactly three log entries",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#runBtn");
+        await ctx.wait(50);
+        return ctx.qsa("#logList li").length === 3;
+      },
+    },
+    {
+      id: "eventloop.correct-order",
+      description: "The log ends up in event-loop order: sync, microtask, macrotask",
+      points: 40,
+      visibility: "public",
+      hint: "Call logSync(), logTimeout(), logMicrotask() in that source order and let the event loop reorder the output.",
+      run: async (ctx) => {
+        ctx.click("#runBtn");
+        await ctx.wait(50);
+        const items = ctx.qsa("#logList li").map((el) => el.textContent?.trim());
+        return (
+          items[0] === "Synchronous" &&
+          items[1] === "Promise (microtask)" &&
+          items[2] === "Timeout (macrotask)"
+        );
+      },
+    },
+    {
+      id: "eventloop.clears-on-rerun",
+      description: "Running again clears the previous log instead of appending to it",
+      points: 30,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.click("#runBtn");
+        await ctx.wait(50);
+        ctx.click("#runBtn");
+        await ctx.wait(50);
+        return ctx.qsa("#logList li").length === 3;
+      },
+    },
+  ],
+  "jsfund-05": [
+    {
+      id: "thisbinding.initial-empty",
+      description: "The score output is empty before the button is clicked",
+      points: 10,
+      visibility: "public",
+      run: (ctx) => (ctx.text("#scoreOutput") ?? "") === "",
+    },
+    {
+      id: "thisbinding.correct-after-click",
+      description: "Clicking Show Score displays \"Riya: 42\" using the correct `this`",
+      points: 90,
+      visibility: "public",
+      hint: "Use player.showScore.bind(player), an arrow-function wrapper, or call player.showScore() inside a wrapper - don't rename player's properties.",
+      run: async (ctx) => {
+        ctx.click("#showScoreBtn");
+        await ctx.wait(30);
+        return ctx.text("#scoreOutput") === "Riya: 42";
+      },
+    },
+  ],
+  "jsfund-06": [
+    {
+      id: "debounce.single-log-after-burst",
+      description: "Typing quickly only logs once, after the pause",
+      points: 60,
+      visibility: "public",
+      hint: "debounce(fn, delay) should clearTimeout the previous pending call every time it's invoked again.",
+      run: async (ctx) => {
+        ctx.type("#searchInput", "h");
+        await ctx.wait(50);
+        ctx.type("#searchInput", "he");
+        await ctx.wait(50);
+        ctx.type("#searchInput", "hel");
+        await ctx.wait(50);
+        ctx.type("#searchInput", "hell");
+        await ctx.wait(50);
+        ctx.type("#searchInput", "hello");
+        await ctx.wait(600);
+        return ctx.qsa("#logList li").length === 1;
+      },
+    },
+    {
+      id: "debounce.logs-final-value",
+      description: "The single logged entry reflects the final typed value",
+      points: 40,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#searchInput", "h");
+        await ctx.wait(50);
+        ctx.type("#searchInput", "he");
+        await ctx.wait(50);
+        ctx.type("#searchInput", "hello");
+        await ctx.wait(600);
+        const text = ctx.qsa("#logList li")[0]?.textContent ?? "";
+        return text.includes("hello");
+      },
+    },
+  ],
+  "jsfund-07": [
+    {
+      id: "scope.five-buttons",
+      description: "Five number buttons are generated",
+      points: 10,
+      visibility: "public",
+      run: (ctx) => ctx.qsa("#buttonRow button").length === 5,
+    },
+    {
+      id: "scope.middle-button-correct",
+      description: "Clicking the 3rd button logs its own number, not the last one",
+      points: 45,
+      visibility: "public",
+      hint: "Change var to let in the for-loop so each closure captures its own copy of the loop variable.",
+      run: async (ctx) => {
+        const buttons = ctx.qsa("#buttonRow button");
+        (buttons[2] as HTMLElement)?.click();
+        await ctx.wait(30);
+        const items = ctx.qsa("#logList li");
+        return items[items.length - 1]?.textContent?.trim() === "Button 3 clicked";
+      },
+    },
+    {
+      id: "scope.first-button-correct",
+      description: "Clicking the 1st button logs its own number too",
+      points: 45,
+      visibility: "hidden",
+      run: async (ctx) => {
+        const buttons = ctx.qsa("#buttonRow button");
+        (buttons[0] as HTMLElement)?.click();
+        await ctx.wait(30);
+        const items = ctx.qsa("#logList li");
+        return items[items.length - 1]?.textContent?.trim() === "Button 1 clicked";
       },
     },
   ],

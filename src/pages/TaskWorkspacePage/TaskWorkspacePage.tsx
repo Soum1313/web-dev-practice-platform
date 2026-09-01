@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "../../components/Header/Header";
-import { DayNav } from "../../components/DayNav/DayNav";
+import { TrackNav } from "../../components/TrackNav/TrackNav";
 import { TaskInstructions } from "../../components/TaskInstructions/TaskInstructions";
 import { FileTabs } from "../../components/FileTabs/FileTabs";
 import { CodeEditor } from "../../components/CodeEditor/CodeEditor";
@@ -132,8 +132,8 @@ function TaskWorkspace({ task }: { task: Task }) {
         <div
           className={`workspace__body${navCollapsed ? " workspace__body--nav-collapsed" : ""}`}
         >
-          <div className="workspace__panel workspace__daynav">
-            <DayNav
+          <div className="workspace__panel workspace__tracknav">
+            <TrackNav
               currentTaskId={task.id}
               statusByTaskId={{ ...statusByTaskId, [task.id]: progress.status }}
               collapsed={navCollapsed}

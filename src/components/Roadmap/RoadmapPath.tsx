@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import type { Task, TaskStatus } from "../../types/task";
+import "./Roadmap.css";
 
 type RoadmapPathProps = {
   steps: Task[];
