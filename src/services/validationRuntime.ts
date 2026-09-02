@@ -86,6 +86,14 @@ export function buildHarnessScript(test: ValidationTest): string {
 
   return `
 (function () {
+  // Stub window.alert immediately (before the student's own script runs)
+  // so a real native dialog never blocks the hidden validation iframe.
+  // Calls are recorded on window.__alerts instead.
+  window.__alerts = [];
+  window.alert = function (message) {
+    window.__alerts.push(String(message));
+  };
+
   var buildCtx = ${ctxSource};
   var runTest = ${runSource};
 

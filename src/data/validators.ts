@@ -5,9 +5,8 @@ import type { ValidationTest } from "../types/validation";
  * simulated interaction (click/type/submit), never the student's source
  * code, so any correct implementation passes regardless of syntax choice.
  *
- * Covers the JavaScript track (task-01..06, day3-03, day3-04) and the
- * JS Fundamentals track (jsfund-01..07). HTML, CSS, HTML+CSS, Full
- * Project, and the Practice Bank don't have validators yet.
+ * Covers every task on the platform: HTML, CSS, HTML + CSS, JavaScript,
+ * JS Fundamentals, Full Project, and the Practice Bank.
  */
 export const validators: Record<string, ValidationTest[]> = {
   "task-01": [
@@ -863,6 +862,1031 @@ export const validators: Record<string, ValidationTest[]> = {
         await ctx.wait(30);
         const items = ctx.qsa("#logList li");
         return items[items.length - 1]?.textContent?.trim() === "Button 1 clicked";
+      },
+    },
+  ],
+  "day1-01": [
+    {
+      id: "html01.heading-changed",
+      description: "The main heading text has been changed",
+      points: 30,
+      visibility: "public",
+      run: (ctx) => {
+        const text = ctx.text("h1") ?? "";
+        return text.trim() !== "" && text.trim() !== "Student Portal";
+      },
+    },
+    {
+      id: "html01.welcome-changed",
+      description: "The welcome paragraph has been changed",
+      points: 25,
+      visibility: "public",
+      run: (ctx) => {
+        const p = ctx.qsa("p")[0];
+        const text = (p?.textContent ?? "").trim();
+        return text !== "" && text !== "Welcome to the placement preparation program.";
+      },
+    },
+    {
+      id: "html01.status-paragraph-added",
+      description: "A new paragraph showing a preparation status was added",
+      points: 25,
+      visibility: "public",
+      hint: "Add a new <p> below the student details (Name/Roll Number/Status).",
+      run: (ctx) => ctx.qsa("p").length >= 5,
+    },
+    {
+      id: "html01.button-text-changed",
+      description: 'The button text was changed to "See My Profile"',
+      points: 20,
+      visibility: "public",
+      run: (ctx) => (ctx.text("button") ?? "").trim() === "See My Profile",
+    },
+  ],
+  "day1-02": [
+    {
+      id: "html02.status-id",
+      description: 'The status <span> has id="studentStatus"',
+      points: 25,
+      visibility: "public",
+      run: (ctx) => (ctx.text("#studentStatus") ?? "").includes("Active"),
+    },
+    {
+      id: "html02.shared-class",
+      description: 'Both buttons share class="profile-btn"',
+      points: 25,
+      visibility: "public",
+      run: (ctx) => ctx.qsa("button.profile-btn").length === 2,
+    },
+    {
+      id: "html02.view-profile-id",
+      description: 'The "View Profile" button has id="viewProfileBtn"',
+      points: 25,
+      visibility: "public",
+      run: (ctx) => (ctx.text("#viewProfileBtn") ?? "").trim() === "View Profile",
+    },
+    {
+      id: "html02.edit-profile-id",
+      description: 'The "Edit Profile" button has id="editProfileBtn"',
+      points: 25,
+      visibility: "hidden",
+      run: (ctx) => (ctx.text("#editProfileBtn") ?? "").trim() === "Edit Profile",
+    },
+  ],
+  "day1-03": [
+    {
+      id: "css01.heading-color",
+      description: "The <h1> heading colour was changed",
+      points: 20,
+      visibility: "public",
+      run: (ctx) => ctx.computedStyle("h1", "color") !== "rgb(0, 0, 0)",
+    },
+    {
+      id: "css01.card-background",
+      description: "The card has a background colour",
+      points: 15,
+      visibility: "public",
+      run: (ctx) => {
+        const bg = ctx.computedStyle(".card", "backgroundColor");
+        return !!bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent";
+      },
+    },
+    {
+      id: "css01.card-padding",
+      description: "The card has padding",
+      points: 15,
+      visibility: "public",
+      run: (ctx) => ctx.computedStyle(".card", "paddingTop") !== "0px",
+    },
+    {
+      id: "css01.card-border",
+      description: "The card has a visible border",
+      points: 15,
+      visibility: "public",
+      run: (ctx) => {
+        const width = ctx.computedStyle(".card", "borderTopWidth");
+        const style = ctx.computedStyle(".card", "borderTopStyle");
+        return width !== "0px" && style !== "none";
+      },
+    },
+    {
+      id: "css01.card-radius",
+      description: "The card's corners are rounded",
+      points: 15,
+      visibility: "public",
+      run: (ctx) => ctx.computedStyle(".card", "borderTopLeftRadius") !== "0px",
+    },
+    {
+      id: "css01.paragraph-margin",
+      description: "There is margin spacing between the paragraphs in the card",
+      points: 10,
+      visibility: "hidden",
+      run: (ctx) => {
+        const p = ctx.qsa(".card p")[0];
+        if (!p) return false;
+        const style = ctx.win.getComputedStyle(p);
+        return style.marginTop !== "0px" || style.marginBottom !== "0px";
+      },
+    },
+    {
+      id: "css01.button-styled",
+      description: "The button has a background colour and text colour",
+      points: 10,
+      visibility: "hidden",
+      run: (ctx) => ctx.computedStyle(".card button", "color") !== "rgb(0, 0, 0)",
+    },
+  ],
+  "day1-04": [
+    {
+      id: "css02.element-selector",
+      description: "All paragraphs are styled via an element selector",
+      points: 25,
+      visibility: "public",
+      run: (ctx) => {
+        const ps = ctx.qsa("p");
+        if (ps.length < 2) return false;
+        const c0 = ctx.win.getComputedStyle(ps[0]).color;
+        const c1 = ctx.win.getComputedStyle(ps[1]).color;
+        return c0 === c1 && c0 !== "rgb(0, 0, 0)";
+      },
+    },
+    {
+      id: "css02.id-selector",
+      description: "The status is styled distinctly via its ID selector",
+      points: 25,
+      visibility: "public",
+      run: (ctx) => {
+        const pColor = ctx.win.getComputedStyle(ctx.qsa("p")[0]).color;
+        const statusColor = ctx.computedStyle("#status", "color");
+        const statusBg = ctx.computedStyle("#status", "backgroundColor");
+        return statusColor !== pColor || (!!statusBg && statusBg !== "rgba(0, 0, 0, 0)");
+      },
+    },
+    {
+      id: "css02.class-selector",
+      description: "Both buttons are styled via their shared class selector",
+      points: 25,
+      visibility: "public",
+      run: (ctx) => {
+        const btns = ctx.qsa(".primary-btn");
+        if (btns.length !== 2) return false;
+        const c0 = ctx.win.getComputedStyle(btns[0]).backgroundColor;
+        const c1 = ctx.win.getComputedStyle(btns[1]).backgroundColor;
+        return c0 === c1 && c0 !== "rgba(0, 0, 0, 0)";
+      },
+    },
+    {
+      id: "css02.status-distinct",
+      description: "The status is visually distinct (background, bold, or padding)",
+      points: 25,
+      visibility: "hidden",
+      run: (ctx) => {
+        const bg = ctx.computedStyle("#status", "backgroundColor");
+        const weight = ctx.computedStyle("#status", "fontWeight");
+        const padding = ctx.computedStyle("#status", "paddingTop");
+        return (!!bg && bg !== "rgba(0, 0, 0, 0)") || Number(weight) >= 600 || padding !== "0px";
+      },
+    },
+  ],
+  "day1-05": [
+    {
+      id: "js01.no-errors",
+      description: "The page still loads correctly after selecting the element",
+      points: 100,
+      visibility: "public",
+      hint: 'Use document.getElementById("message") and store it in a variable.',
+      run: (ctx) => (ctx.text("#message") ?? "") === "Hello",
+    },
+  ],
+  "day1-06": [
+    {
+      id: "js02.text-not-default",
+      description: "The message text is no longer the original placeholder",
+      points: 30,
+      visibility: "public",
+      run: (ctx) => (ctx.text("#message") ?? "") !== "Old Message",
+    },
+    {
+      id: "js02.exact-text",
+      description: 'The message reads exactly "Welcome to Web Development Practice"',
+      points: 70,
+      visibility: "public",
+      run: (ctx) => ctx.text("#message") === "Welcome to Web Development Practice",
+    },
+  ],
+  "day1-07": [
+    {
+      id: "js03.initial-waiting",
+      description: 'The message initially reads "Waiting..."',
+      points: 10,
+      visibility: "public",
+      run: (ctx) => ctx.text("#message") === "Waiting...",
+    },
+    {
+      id: "js03.click-changes-text",
+      description: 'Clicking the button changes the message to "Button clicked!"',
+      points: 90,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#btn");
+        await ctx.wait(30);
+        return ctx.text("#message") === "Button clicked!";
+      },
+    },
+  ],
+  "day1-08": [
+    {
+      id: "js04.alert-triggered",
+      description: "Clicking Submit shows a popup",
+      points: 40,
+      visibility: "public",
+      hint: "Use alert(...) inside a click listener on #submitBtn.",
+      run: async (ctx) => {
+        ctx.click("#submitBtn");
+        await ctx.wait(30);
+        return (ctx.win as any).__alerts.length > 0;
+      },
+    },
+    {
+      id: "js04.alert-message",
+      description: 'The popup reads exactly "Registration successful!"',
+      points: 60,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#submitBtn");
+        await ctx.wait(30);
+        return (ctx.win as any).__alerts.includes("Registration successful!");
+      },
+    },
+  ],
+  "day1-09": [
+    {
+      id: "js05.empty-name-blocked",
+      description: "Clicking Register with an empty name shows the correct error popup",
+      points: 40,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#registerBtn");
+        await ctx.wait(30);
+        return (ctx.win as any).__alerts.includes("Please enter your name.");
+      },
+    },
+    {
+      id: "js05.valid-name-success",
+      description: "Clicking Register with a name shows the success popup",
+      points: 60,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#nameInput", "Ananya");
+        ctx.click("#registerBtn");
+        await ctx.wait(30);
+        return (ctx.win as any).__alerts.includes("Registration successful!");
+      },
+    },
+  ],
+  "day1-10": [
+    {
+      id: "js06.initial-visible",
+      description: "The message is visible initially",
+      points: 10,
+      visibility: "public",
+      run: (ctx) => ctx.isVisible("#message"),
+    },
+    {
+      id: "js06.hide-works",
+      description: "Clicking Hide Message hides the message",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#hideBtn");
+        await ctx.wait(30);
+        return !ctx.isVisible("#message");
+      },
+    },
+    {
+      id: "js06.show-works",
+      description: "Clicking Show Message reveals the message again",
+      points: 40,
+      visibility: "hidden",
+      hint: "Optional challenge: give #showBtn a click listener that sets display back.",
+      run: async (ctx) => {
+        ctx.click("#hideBtn");
+        await ctx.wait(30);
+        ctx.click("#showBtn");
+        await ctx.wait(30);
+        return ctx.isVisible("#message");
+      },
+    },
+  ],
+  "day1-11": [
+    {
+      id: "htmlcss01.status-id",
+      description: 'The status span has id="studentStatus"',
+      points: 15,
+      visibility: "public",
+      run: (ctx) => (ctx.text("#studentStatus") ?? "").includes("Active"),
+    },
+    {
+      id: "htmlcss01.button-class",
+      description: 'The button has class="profile-btn"',
+      points: 15,
+      visibility: "public",
+      run: (ctx) => ctx.qsa("button.profile-btn").length === 1,
+    },
+    {
+      id: "htmlcss01.card-styled",
+      description: "The card has a visible border, padding, and rounded corners",
+      points: 25,
+      visibility: "public",
+      run: (ctx) => {
+        const borderWidth = ctx.computedStyle(".card", "borderTopWidth");
+        const padding = ctx.computedStyle(".card", "paddingTop");
+        const radius = ctx.computedStyle(".card", "borderTopLeftRadius");
+        return borderWidth !== "0px" && padding !== "0px" && radius !== "0px";
+      },
+    },
+    {
+      id: "htmlcss01.status-background",
+      description: "The status has a background colour",
+      points: 20,
+      visibility: "public",
+      run: (ctx) => {
+        const bg = ctx.computedStyle("#studentStatus", "backgroundColor");
+        return !!bg && bg !== "rgba(0, 0, 0, 0)";
+      },
+    },
+    {
+      id: "htmlcss01.button-styled",
+      description: "The button has a background colour and text colour",
+      points: 15,
+      visibility: "hidden",
+      run: (ctx) => {
+        const bg = ctx.computedStyle(".profile-btn", "backgroundColor");
+        return !!bg && bg !== "rgba(0, 0, 0, 0)";
+      },
+    },
+    {
+      id: "htmlcss01.spacing",
+      description: "There is margin spacing between elements inside the card",
+      points: 10,
+      visibility: "hidden",
+      run: (ctx) => {
+        const el = ctx.qsa(".card h2")[0] ?? ctx.qsa(".card p")[0];
+        if (!el) return false;
+        const style = ctx.win.getComputedStyle(el);
+        return style.marginTop !== "0px" || style.marginBottom !== "0px";
+      },
+    },
+  ],
+  "day1-12": [
+    {
+      id: "fullproj1.ids-assigned",
+      description: "The name input, status span, and register button all have the correct ids",
+      points: 15,
+      visibility: "public",
+      run: (ctx) => !!ctx.qs("#studentName") && !!ctx.qs("#status") && !!ctx.qs("#registerBtn"),
+    },
+    {
+      id: "fullproj1.status-styled",
+      description: "The status is styled with background colour and padding",
+      points: 15,
+      visibility: "public",
+      run: (ctx) => {
+        const bg = ctx.computedStyle("#status", "backgroundColor");
+        const padding = ctx.computedStyle("#status", "paddingTop");
+        return !!bg && bg !== "rgba(0, 0, 0, 0)" && padding !== "0px";
+      },
+    },
+    {
+      id: "fullproj1.button-styled",
+      description: "The button is styled with background and text colour",
+      points: 10,
+      visibility: "hidden",
+      run: (ctx) => {
+        const bg = ctx.computedStyle("#registerBtn", "backgroundColor");
+        return !!bg && bg !== "rgba(0, 0, 0, 0)";
+      },
+    },
+    {
+      id: "fullproj1.empty-name-blocked",
+      description: "Clicking Register with an empty name shows the error popup and doesn't register",
+      points: 25,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#registerBtn");
+        await ctx.wait(30);
+        return (ctx.win as any).__alerts.includes("Please enter your name.") && ctx.text("#status") === "Not Registered";
+      },
+    },
+    {
+      id: "fullproj1.valid-name-registers",
+      description: 'A filled name registers: status becomes "Registered" and a success popup shows',
+      points: 35,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#studentName", "Ananya");
+        ctx.click("#registerBtn");
+        await ctx.wait(30);
+        return ctx.text("#status") === "Registered" && (ctx.win as any).__alerts.includes("Registration successful!");
+      },
+    },
+  ],
+  "day5-final-simulation": [
+    {
+      id: "leave.status-has-id",
+      description: "The status element has an id so it can be targeted",
+      points: 10,
+      visibility: "public",
+      run: (ctx) => (ctx.qs(".status-text")?.id ?? "") !== "",
+    },
+    {
+      id: "leave.status-styled",
+      description: "The status text is styled to stand out once changed",
+      points: 15,
+      visibility: "hidden",
+      run: (ctx) => {
+        const el = ctx.qs(".status-text");
+        if (!el) return false;
+        const style = ctx.win.getComputedStyle(el);
+        const bg = style.backgroundColor;
+        return (!!bg && bg !== "rgba(0, 0, 0, 0)") || style.paddingLeft !== "0px";
+      },
+    },
+    {
+      id: "leave.empty-fields-blocked",
+      description: "Submitting with empty fields is blocked and shows an error",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.submitForm("#leaveForm");
+        await ctx.wait(30);
+        return ctx.text(".status-text") === "Not Submitted";
+      },
+    },
+    {
+      id: "leave.valid-submission",
+      description: "A fully filled form submits successfully: status updates, a popup shows, fields clear",
+      points: 45,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#employeeName", "Ananya");
+        ctx.select("#leaveType", "sick");
+        ctx.type("#reason", "Not feeling well");
+        ctx.submitForm("#leaveForm");
+        await ctx.wait(30);
+        const statusChanged = ctx.text(".status-text") !== "Not Submitted";
+        const alerted = (ctx.win as any).__alerts.length > 0;
+        const nameEl = ctx.qs("#employeeName") as HTMLInputElement | null;
+        const cleared = !nameEl || nameEl.value === "";
+        return statusChanged && alerted && cleared;
+      },
+    },
+  ],
+  "misc-01": [
+    {
+      id: "randombg.changes-once",
+      description: "Clicking the button changes the page background colour",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        const before = ctx.computedStyle("body", "backgroundColor");
+        ctx.click("#randomBtn");
+        await ctx.wait(30);
+        const after = ctx.computedStyle("body", "backgroundColor");
+        return before !== after;
+      },
+    },
+    {
+      id: "randombg.changes-again",
+      description: "Clicking again changes it to a new colour",
+      points: 50,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.click("#randomBtn");
+        await ctx.wait(30);
+        const first = ctx.computedStyle("body", "backgroundColor");
+        ctx.click("#randomBtn");
+        await ctx.wait(30);
+        const second = ctx.computedStyle("body", "backgroundColor");
+        return first !== second;
+      },
+    },
+  ],
+  "misc-02": [
+    {
+      id: "showcase.click-updates-preview",
+      description: "Clicking a thumbnail updates the preview colour and caption",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        const before = ctx.computedStyle("#mainPreview", "backgroundColor");
+        ctx.click('.thumb[data-color="#e63946"]');
+        await ctx.wait(30);
+        const after = ctx.computedStyle("#mainPreview", "backgroundColor");
+        return after !== before && ctx.text("#previewCaption") === "Sunset Red";
+      },
+    },
+    {
+      id: "showcase.click-different-thumb",
+      description: "Clicking a different thumbnail updates the preview again",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click('.thumb[data-color="#e63946"]');
+        await ctx.wait(30);
+        const first = ctx.computedStyle("#mainPreview", "backgroundColor");
+        ctx.click('.thumb[data-color="#457b9d"]');
+        await ctx.wait(30);
+        const second = ctx.computedStyle("#mainPreview", "backgroundColor");
+        return second !== first && ctx.text("#previewCaption") === "Ocean Blue";
+      },
+    },
+  ],
+  "misc-03": [
+    {
+      id: "greeting.text-updates",
+      description: "Typing in the text field updates the greeting",
+      points: 35,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#textInput", "Hello Team");
+        await ctx.wait(30);
+        return ctx.text("#greetingText") === "Hello Team";
+      },
+    },
+    {
+      id: "greeting.color-updates",
+      description: "Changing the colour picker updates the greeting's text colour",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        const before = ctx.computedStyle("#greetingText", "color");
+        ctx.type("#colorInput", "#ff0000");
+        await ctx.wait(30);
+        const after = ctx.computedStyle("#greetingText", "color");
+        return after !== before;
+      },
+    },
+    {
+      id: "greeting.size-updates",
+      description: "Changing the size slider updates the greeting's font size",
+      points: 35,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#sizeInput", "40");
+        await ctx.wait(30);
+        return ctx.computedStyle("#greetingText", "fontSize") === "40px";
+      },
+    },
+  ],
+  "misc-04": [
+    {
+      id: "modal.initial-hidden",
+      description: "The modal is hidden initially",
+      points: 10,
+      visibility: "public",
+      run: (ctx) => !ctx.isVisible("#infoModal"),
+    },
+    {
+      id: "modal.open-works",
+      description: "Clicking the Open button reveals the modal",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#openModalBtn");
+        await ctx.wait(30);
+        return ctx.isVisible("#infoModal");
+      },
+    },
+    {
+      id: "modal.close-button-works",
+      description: "Clicking the Close button hides the modal again",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#openModalBtn");
+        await ctx.wait(30);
+        ctx.click("#closeModalBtn");
+        await ctx.wait(30);
+        return !ctx.isVisible("#infoModal");
+      },
+    },
+    {
+      id: "modal.overlay-click-closes",
+      description: "Clicking the overlay background also closes the modal",
+      points: 30,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.click("#openModalBtn");
+        await ctx.wait(30);
+        ctx.click("#infoModal");
+        await ctx.wait(30);
+        return !ctx.isVisible("#infoModal");
+      },
+    },
+  ],
+  "misc-05": [
+    {
+      id: "pwform.invalid-shows-errors",
+      description: "Submitting a short/mismatched password shows both errors and no success",
+      points: 35,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#password", "abc");
+        ctx.type("#confirmPassword", "xyz");
+        ctx.submitForm("#passwordForm");
+        await ctx.wait(30);
+        const pwError = (ctx.text("#passwordError") ?? "") !== "";
+        const confirmError = (ctx.text("#confirmPasswordError") ?? "") !== "";
+        return pwError && confirmError && !ctx.isVisible("#formSuccess");
+      },
+    },
+    {
+      id: "pwform.valid-shows-success",
+      description: "Submitting a valid matching password shows success and clears errors",
+      points: 35,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#password", "secure123");
+        ctx.type("#confirmPassword", "secure123");
+        ctx.submitForm("#passwordForm");
+        await ctx.wait(30);
+        return (
+          ctx.isVisible("#formSuccess") &&
+          (ctx.text("#passwordError") ?? "") === "" &&
+          (ctx.text("#confirmPasswordError") ?? "") === ""
+        );
+      },
+    },
+    {
+      id: "pwform.no-reload",
+      description: "Submitting the form doesn't reload the page",
+      points: 30,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.submitForm("#passwordForm");
+        await ctx.wait(30);
+        return !!ctx.qs("#passwordForm");
+      },
+    },
+  ],
+  "misc-06": [
+    {
+      id: "quiz.no-selection-error",
+      description: "Submitting with no option selected shows an error, not a result",
+      points: 25,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#submitQuizBtn");
+        await ctx.wait(30);
+        const text = ctx.text("#quizResult") ?? "";
+        return text !== "" && text !== "Correct!" && text !== "Incorrect.";
+      },
+    },
+    {
+      id: "quiz.correct-answer",
+      description: 'Selecting the correct answer shows "Correct!"',
+      points: 40,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click('input[name="quizAnswer"][value="paris"]');
+        ctx.click("#submitQuizBtn");
+        await ctx.wait(30);
+        return ctx.text("#quizResult") === "Correct!";
+      },
+    },
+    {
+      id: "quiz.wrong-answer",
+      description: 'Selecting a wrong answer shows "Incorrect."',
+      points: 35,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click('input[name="quizAnswer"][value="london"]');
+        ctx.click("#submitQuizBtn");
+        await ctx.wait(30);
+        return ctx.text("#quizResult") === "Incorrect.";
+      },
+    },
+  ],
+  "misc-07": [
+    {
+      id: "search.filters-matches",
+      description: "Typing a search term shows only matching items",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#searchInput", "javascript");
+        await ctx.wait(30);
+        const items = ctx.qsa(".filter-item") as HTMLElement[];
+        const shown = items.filter((el) => el.style.display !== "none" && ctx.win.getComputedStyle(el).display !== "none");
+        return shown.length === 1 && shown[0].textContent!.toLowerCase().includes("javascript");
+      },
+    },
+    {
+      id: "search.clearing-shows-all",
+      description: "Clearing the search shows every item again",
+      points: 25,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#searchInput", "javascript");
+        await ctx.wait(30);
+        ctx.type("#searchInput", "");
+        await ctx.wait(30);
+        const items = ctx.qsa(".filter-item") as HTMLElement[];
+        return items.every((el) => ctx.win.getComputedStyle(el).display !== "none");
+      },
+    },
+    {
+      id: "search.no-match-hides-all",
+      description: "A search with no matches hides every item",
+      points: 25,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.type("#searchInput", "zzzznomatch");
+        await ctx.wait(30);
+        const items = ctx.qsa(".filter-item") as HTMLElement[];
+        return items.every((el) => ctx.win.getComputedStyle(el).display === "none");
+      },
+    },
+  ],
+  "misc-08": [
+    {
+      id: "tabs.initial-state",
+      description: "The Profile panel is shown initially and its tab is active",
+      points: 15,
+      visibility: "public",
+      run: (ctx) =>
+        ctx.isVisible('.tab-panel[data-tab="profile"]') &&
+        !!ctx.qs('.tab-btn[data-tab="profile"]')?.classList.contains("active"),
+    },
+    {
+      id: "tabs.switch-to-courses",
+      description: "Clicking the Courses tab shows only the Courses panel",
+      points: 45,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click('.tab-btn[data-tab="courses"]');
+        await ctx.wait(30);
+        const coursesVisible = ctx.isVisible('.tab-panel[data-tab="courses"]');
+        const othersHidden = !ctx.isVisible('.tab-panel[data-tab="profile"]') && !ctx.isVisible('.tab-panel[data-tab="results"]');
+        const activeCorrect =
+          !!ctx.qs('.tab-btn[data-tab="courses"]')?.classList.contains("active") &&
+          !ctx.qs('.tab-btn[data-tab="profile"]')?.classList.contains("active");
+        return coursesVisible && othersHidden && activeCorrect;
+      },
+    },
+    {
+      id: "tabs.switch-to-results",
+      description: "Clicking the Results tab shows only the Results panel",
+      points: 40,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click('.tab-btn[data-tab="results"]');
+        await ctx.wait(30);
+        const resultsVisible = ctx.isVisible('.tab-panel[data-tab="results"]');
+        const othersHidden = !ctx.isVisible('.tab-panel[data-tab="profile"]') && !ctx.isVisible('.tab-panel[data-tab="courses"]');
+        return resultsVisible && othersHidden;
+      },
+    },
+  ],
+  "misc-09": [
+    {
+      id: "carousel.initial-counter",
+      description: 'The counter initially reads "Slide 1 / 4"',
+      points: 10,
+      visibility: "public",
+      run: (ctx) => ctx.text("#slideCounter") === "Slide 1 / 4",
+    },
+    {
+      id: "carousel.next-advances",
+      description: "Clicking Next advances to slide 2",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        const before = ctx.text("#slideDisplay");
+        ctx.click("#nextBtn");
+        await ctx.wait(30);
+        return ctx.text("#slideCounter") === "Slide 2 / 4" && ctx.text("#slideDisplay") !== before;
+      },
+    },
+    {
+      id: "carousel.wraps-forward",
+      description: "Clicking Next four times wraps back to slide 1",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click("#nextBtn");
+        ctx.click("#nextBtn");
+        ctx.click("#nextBtn");
+        ctx.click("#nextBtn");
+        await ctx.wait(30);
+        return ctx.text("#slideCounter") === "Slide 1 / 4";
+      },
+    },
+    {
+      id: "carousel.wraps-backward",
+      description: "Clicking Previous from slide 1 wraps to the last slide",
+      points: 30,
+      visibility: "hidden",
+      run: async (ctx) => {
+        ctx.click("#prevBtn");
+        await ctx.wait(30);
+        return ctx.text("#slideCounter") === "Slide 4 / 4";
+      },
+    },
+  ],
+  "misc-10": [
+    {
+      id: "gallery.initial-empty",
+      description: "The gallery starts empty",
+      points: 10,
+      visibility: "public",
+      run: (ctx) => ctx.qsa("#gallery > *").length === 0,
+    },
+    {
+      id: "gallery.add-item",
+      description: "Adding a photo appends it to the gallery and clears the input",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#photoCaption", "Sunset");
+        ctx.click("#addPhotoBtn");
+        await ctx.wait(30);
+        const items = ctx.qsa("#gallery > *");
+        const input = ctx.qs("#photoCaption") as HTMLInputElement | null;
+        return items.length === 1 && items[0].textContent!.includes("Sunset") && input?.value === "";
+      },
+    },
+    {
+      id: "gallery.remove-item",
+      description: "Removing one item deletes only that item",
+      points: 40,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#photoCaption", "AAA");
+        ctx.click("#addPhotoBtn");
+        await ctx.wait(30);
+        ctx.type("#photoCaption", "BBB");
+        ctx.click("#addPhotoBtn");
+        await ctx.wait(30);
+        const items = ctx.qsa("#gallery > *");
+        if (items.length !== 2) return false;
+        const removeBtn = items[1].querySelector("button");
+        if (!removeBtn) return false;
+        (removeBtn as HTMLElement).click();
+        await ctx.wait(30);
+        const remaining = ctx.qsa("#gallery > *");
+        return remaining.length === 1 && remaining[0].textContent!.includes("AAA");
+      },
+    },
+  ],
+  "misc-11": [
+    {
+      id: "checklist.toggle-on",
+      description: "Clicking an item marks it completed",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click(".checklist-item");
+        await ctx.wait(30);
+        return !!ctx.qsa(".checklist-item")[0]?.classList.contains("completed");
+      },
+    },
+    {
+      id: "checklist.toggle-off",
+      description: "Clicking it again un-marks it",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.click(".checklist-item");
+        await ctx.wait(30);
+        ctx.click(".checklist-item");
+        await ctx.wait(30);
+        return !ctx.qsa(".checklist-item")[0]?.classList.contains("completed");
+      },
+    },
+    {
+      id: "checklist.independent",
+      description: "Each item works independently of the others",
+      points: 40,
+      visibility: "public",
+      run: async (ctx) => {
+        const items = ctx.qsa(".checklist-item");
+        (items[1] as HTMLElement).click();
+        await ctx.wait(30);
+        return (
+          !!items[1].classList.contains("completed") &&
+          !items[0].classList.contains("completed") &&
+          !items[2].classList.contains("completed")
+        );
+      },
+    },
+  ],
+  "misc-12": [
+    {
+      id: "fruit.initial-apple",
+      description: "The display initially shows Apple",
+      points: 10,
+      visibility: "public",
+      run: (ctx) => (ctx.text("#fruitDisplay") ?? "").toLowerCase().includes("apple"),
+    },
+    {
+      id: "fruit.change-to-banana",
+      description: "Selecting Banana updates the display",
+      points: 45,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.select("#fruitSelect", "banana");
+        await ctx.wait(30);
+        return (ctx.text("#fruitDisplay") ?? "").toLowerCase().includes("banana");
+      },
+    },
+    {
+      id: "fruit.change-to-watermelon",
+      description: "Selecting Watermelon updates the display again",
+      points: 45,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.select("#fruitSelect", "watermelon");
+        await ctx.wait(30);
+        return (ctx.text("#fruitDisplay") ?? "").toLowerCase().includes("watermelon");
+      },
+    },
+  ],
+  "misc-13": [
+    {
+      id: "stars.click-selects",
+      description: "Clicking the 3rd star sets the rating to 3 / 5 and highlights stars 1-3",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        const stars = ctx.qsa(".star");
+        (stars[2] as HTMLElement).click();
+        await ctx.wait(30);
+        const labelOk = (ctx.text("#ratingLabel") ?? "").includes("3");
+        const activeOk =
+          stars[0].classList.contains("active") &&
+          stars[1].classList.contains("active") &&
+          stars[2].classList.contains("active") &&
+          !stars[3].classList.contains("active") &&
+          !stars[4].classList.contains("active");
+        return labelOk && activeOk;
+      },
+    },
+    {
+      id: "stars.reselect-updates",
+      description: "Selecting a different star updates the rating correctly",
+      points: 30,
+      visibility: "public",
+      run: async (ctx) => {
+        const stars = ctx.qsa(".star");
+        (stars[4] as HTMLElement).click();
+        await ctx.wait(30);
+        (stars[1] as HTMLElement).click();
+        await ctx.wait(30);
+        const labelOk = (ctx.text("#ratingLabel") ?? "").includes("2");
+        const activeOk = stars[0].classList.contains("active") && stars[1].classList.contains("active") && !stars[2].classList.contains("active");
+        return labelOk && activeOk;
+      },
+    },
+    {
+      id: "stars.mouseout-restores-saved",
+      description: "Moving the mouse away restores the previously saved rating",
+      points: 20,
+      visibility: "hidden",
+      run: async (ctx) => {
+        const stars = ctx.qsa(".star");
+        (stars[1] as HTMLElement).click();
+        await ctx.wait(30);
+        stars[4].dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+        await ctx.wait(30);
+        ctx.qs("#starContainer")!.dispatchEvent(new MouseEvent("mouseout", { bubbles: true }));
+        await ctx.wait(30);
+        return (ctx.text("#ratingLabel") ?? "").includes("2");
+      },
+    },
+  ],
+  "misc-14": [
+    {
+      id: "colorpicker.preview-updates",
+      description: "Changing the colour picker updates the preview box's background",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#colorPicker", "#ff0000");
+        await ctx.wait(30);
+        return ctx.computedStyle("#colorPreview", "backgroundColor") === "rgb(255, 0, 0)";
+      },
+    },
+    {
+      id: "colorpicker.value-text-updates",
+      description: "The hex value text updates to match",
+      points: 50,
+      visibility: "public",
+      run: async (ctx) => {
+        ctx.type("#colorPicker", "#ff0000");
+        await ctx.wait(30);
+        return (ctx.text("#colorValue") ?? "").toLowerCase().includes("#ff0000");
       },
     },
   ],
